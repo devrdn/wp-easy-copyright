@@ -25,14 +25,33 @@ class SC_Page
    public static function init_hooks()
    {
       self::$is_initialized = true;
-      add_action( 'init', array( __CLASS__, 'copyright_post_type_add' ) );
+      add_action( 'init', array( __CLASS__, 'copyright_post_type_register' ) );
       add_action( 'add_meta_boxes', array( __CLASS__, 'copyright_metabox_add' ) );
       add_filter( 'enter_title_here', array( __CLASS__, 'copyright_change_add_title' ) );
       add_action( 'save_post', array( __CLASS__, 'copyright_metabox_save' ), 10, 2 );
    }
 
-   public static function copyright_post_type_add()
+   /**
+    * Register New Post Type Copyright
+    */
+   public static function copyright_post_type_register()
    {
+
+      $labels = array(
+         'name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
+         'singular_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
+         'menu_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
+         'all_items' => esc_html__( 'All Copyrights', 'simple-copy' ),
+         'add_new' => esc_html__( 'Add Copyright', 'simple-copy' ),
+         'add_new_item' => esc_html__( 'Add Copyright', 'simple-copy' ),
+         'edit_item' => esc_html__( 'Edit Copyright', 'simple-copy' ),
+         'new_item' => esc_html__( 'New Copyright', 'simple-copy' ),
+         'view_item' => esc_html__( 'View Copyright', 'simple-copy' ),
+         'search_items' => esc_html__( 'Search Copyright', 'simple-copy' ),
+         'not_found' => esc_html__( 'No Copyright found', 'simple-copy' ),
+         'not_found_in_trash' => esc_html__( 'No Copyright found in Trash', 'simple-copy' )
+      ); 
+
       $args = array(
          'public' => true,
          'publicly_queryable' => false,
@@ -40,18 +59,7 @@ class SC_Page
          'show_in_nav_menus' => false,
          'rewrite' => [ 'slug' => 'Simple Copyright' ],
          'has_archive' => false,
-         'labels' => array(
-            'name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
-            'singular_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
-            'add_new' => esc_html__( 'Add Copyright', 'simple-copy' ),
-            'add_new_item' => esc_html__( 'Add Copyright', 'simple-copy' ),
-            'edit_item' => esc_html__( 'Edit Copyright', 'simple-copy' ),
-            'new_item' => esc_html__( 'New Copyright', 'simple-copy' ),
-            'view_item' => esc_html__( 'View Copyright', 'simple-copy' ),
-            'search_items' => esc_html__( 'Search Copyright', 'simple-copy' ),
-            'not_found' => esc_html__( 'No Copyright found', 'simple-copy' ),
-            'not_found_in_trash' => esc_html__( 'No Copyright found in Trash', 'simple-copy' )
-         ),
+         'labels' => $labels,
          'supports' => array('title'),
          'menu_icon' => 'dashicons-admin-site',
       );

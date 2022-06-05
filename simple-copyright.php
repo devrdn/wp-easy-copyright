@@ -36,7 +36,6 @@ if ( !defined( 'ABSPATH' ) ) {
 
 define( 'SIMPLECOPY___PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-
 require_once( SIMPLECOPY___PLUGIN_DIR . 'inc/class-SC-page.php' );
 
 class SimpleCopyright
