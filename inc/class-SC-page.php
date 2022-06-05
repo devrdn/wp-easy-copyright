@@ -38,11 +38,11 @@ class SC_Page
          'publicly_queryable' => false,
          'exclude_from_search' => false,
          'show_in_nav_menus' => false,
-         'add_new' => 'Add Copyright',
+         'rewrite' => [ 'slug' => 'Simple Copyright' ],
          'has_archive' => false,
          'labels' => array(
-            'name' => esc_html_x( 'MSU Copyright', 'simple-copy' ),
-            'singular_name' => esc_html_x( 'MSU Copyright', 'simple-copy' ),
+            'name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
+            'singular_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
             'add_new' => esc_html__( 'Add Copyright', 'simple-copy' ),
             'add_new_item' => esc_html__( 'Add Copyright', 'simple-copy' ),
             'edit_item' => esc_html__( 'Edit Copyright', 'simple-copy' ),
@@ -83,13 +83,15 @@ class SC_Page
    public static function copyright_metabox_callback( $post ) {
       $sc_copy_text = get_post_meta( $post->ID, 'sc__copy_text', true );
       $sc_starting_year = get_post_meta( $post->ID, 'sc__starting_year', true );
+      $sc_end_year = get_post_meta( $post->ID, 'sc__ending_year', true );
 
       wp_nonce_field( 'simple_copyright_metabox_save', 'simple_copyright_metabox_save_nonce' );
       ?>
          <p>
             <label for="sc__copy_text">Copyright Text: </label>
             <input type="text" id="sc__copy_text" name="sc__copy_text" value="<?php echo esc_html( $sc_copy_text );?>" maxlength="50">
-            <code> * <?php echo esc_html_x('Max text length: 50.', 'simple-copy')?></code>
+            <code> * <?php echo esc_html_x('Name of the enterprise / company, etc.', 'simple-copy');?></code>
+            <i><?php echo esc_html__('Max length').': 50' ?></i>
          </p>
          <p>
             <label for="sc__starting_year">Starting Year: </label>
@@ -97,9 +99,15 @@ class SC_Page
             <code> * <?php echo esc_html_x('Year must be numeric.', 'simple-copy')?> </code>
          </p>
          <p>
-            <label for="sc__starting_year">End Year: </label>
-            <input type="text" id="sc__starting_year" name="sc__starting_year" value="<?php echo esc_html( $sc_starting_year );?>">
+            <label for="sc__ending_year">End Year: </label>
+            <input type="text" id="sc__ending_year" name="sc__ending_year" value="<?php echo esc_html( $sc_end_year );?>">
             <code> * <?php echo esc_html_x('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
+         </p>
+         <p>
+            <label for="sc__ending_year">Copyright symbol: </label>
+            <input type="text" id="sc__ending_year" name="sc__ending_year" value="<?php echo esc_html( $sc_end_year );?>">
+            <code> * <?php echo esc_html__('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.');?> </code>
+            <i><?php echo esc_html__('Max length').': 1' ?></i>
          </p>
       <?php
    }
@@ -137,11 +145,23 @@ class SC_Page
       if ( empty( $_POST['sc__starting_year'] ) ) {
          delete_post_meta( $post_id, 'sc__starting_year' );
       } else {
-         //check if year is valid
+         //check if starting year is valid
          if ( !is_numeric( $_POST['sc__starting_year'] ) ) {
             delete_post_meta( $post_id, 'sc__starting_year' );
          } else {
-            update_post_meta( $post_id, 'sc__starting_year', sanitize_text_field( $_POST['sc__starting_year'] ) );
+            update_post_meta( $post_id, 'sc__starting_year', sanitize_text_field( intval( $_POST['sc__starting_year'] ) ) );
+         }
+      }
+
+      //save ending year
+      if ( empty( $_POST['sc__ending_year'] ) ) {
+         delete_post_meta( $post_id, 'sc__ending_year' );
+      } else {
+         //check if ending year is valid
+         if ( !is_numeric( $_POST['sc__ending_year'] ) ) {
+            delete_post_meta( $post_id, 'sc__ending_year' );
+         } else {
+            update_post_meta( $post_id, 'sc__ending_year', sanitize_text_field( intval( $_POST['sc__ending_year'] ) ) );
          }
       }
    }

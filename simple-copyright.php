@@ -44,16 +44,33 @@ class SimpleCopyright
 
    private static $is_initialized = false;
 
-   public static $instance;
 
-   public function __construct() {
+   public function __construct() {}
 
+   public static function sc_enqueue_admin()
+   {
+      wp_enqueue_style('sc-admin-style',  plugins_url('assets/css/admin/style.css', __FILE__));
+      wp_enqueue_script('sc-admin-script', plugins_url('assets/js/admin/script.js', __FILE__), array('jquery'), 1.0, true);
    }
+
+   public static function sc_enqueue_front()
+   {
+      wp_enqueue_style('sc-front-style',  plugins_url('assets/css/admin/style.css', __FILE__));
+      wp_enqueue_script('sc-front-script', plugins_url('assets/js/admin/script.js', __FILE__), array('jquery'), 1.0, true);
+   }
+
 
    public static function init() {
       if ( ! self::$is_initialized ) {
-         SC_Page::init_hooks();
+         self::$is_initialized = true;
+         self::init_hooks();
+         SC_Page::init_hooks();  
       }
+   }
+
+   public static function init_hooks() {
+      add_action( 'admin_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_admin' ) );
+      add_action( 'wp_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_front' ) );
    }
 
 }
