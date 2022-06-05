@@ -29,7 +29,7 @@ Copyright 2022 Nikken Plugins, Inc.
 */
 
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
    //echo 'Привет, я просто плагин и вызываюсь, когда меня позовут!';
    die();
 }
@@ -48,14 +48,14 @@ class SimpleCopyright
 
    public static function sc_enqueue_admin()
    {
-      wp_enqueue_style('sc-admin-style',  plugins_url('assets/css/admin/style.css', __FILE__));
-      wp_enqueue_script('sc-admin-script', plugins_url('assets/js/admin/script.js', __FILE__), array('jquery'), 1.0, true);
+      wp_enqueue_style( 'sc-admin-style',  plugins_url('assets/css/admin/style.css', __FILE__ ) );
+      wp_enqueue_script( 'sc-admin-script', plugins_url('assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true );
    }
 
    public static function sc_enqueue_front()
    {
-      wp_enqueue_style('sc-front-style',  plugins_url('assets/css/admin/style.css', __FILE__));
-      wp_enqueue_script('sc-front-script', plugins_url('assets/js/admin/script.js', __FILE__), array('jquery'), 1.0, true);
+      wp_enqueue_style( 'sc-front-style',  plugins_url('assets/css/admin/style.css', __FILE__ ) );
+      wp_enqueue_script( 'sc-front-script', plugins_url('assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true);
    }
 
 

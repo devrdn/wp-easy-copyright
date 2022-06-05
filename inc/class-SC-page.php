@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
    //echo 'Привет, я просто плагин и вызываюсь, когда меня позовут!';
    die();
 }
@@ -33,6 +33,8 @@ class SC_Page
 
    /**
     * Register New Post Type Copyright
+    * 
+    * @since 1.0.0
     */
    public static function copyright_post_type_register()
    {
