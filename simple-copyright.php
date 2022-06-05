@@ -69,6 +69,7 @@ class SimpleCopyright
    }
 
    public static function init_hooks() {
+      // hooks for admin/front styles and scripts
       add_action( 'admin_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_admin' ) );
       add_action( 'wp_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_front' ) );
    }
