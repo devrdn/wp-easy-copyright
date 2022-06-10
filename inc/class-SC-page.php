@@ -32,10 +32,10 @@ class SC_Page
    {
       // init hooks
       self::$is_initialized = true;
-      add_action( 'init', array( __CLASS__, 'copyright_post_type_register' ) );
-      add_action( 'add_meta_boxes', array( __CLASS__, 'copyright_metabox_add' ) );
-      add_filter( 'enter_title_here', array( __CLASS__, 'copyright_change_add_title' ) );
-      add_action( 'save_post', array( __CLASS__, 'copyright_metabox_save' ), 10, 2 );
+      add_action( 'init', [ __CLASS__, 'copyright_post_type_register' ] );
+      add_action( 'add_meta_boxes', [ __CLASS__, 'copyright_metabox_add' ] );
+      add_filter( 'enter_title_here', [ __CLASS__, 'copyright_change_add_title' ] );
+      add_action( 'save_post', [ __CLASS__, 'copyright_metabox_save' ], 10, 2 );
    }
 
    /**
@@ -66,14 +66,14 @@ class SC_Page
          'publicly_queryable'  => false,
          'exclude_from_search' => false,
          'show_in_nav_menus'   => false,
-         'rewrite'             => array( 'slug' => SimpleCopyright()::$plugin_slug ),
+         'rewrite'             => [ 'slug' => SimpleCopyright()::$plugin_slug ],
          'has_archive'         => false,
          'labels'              => $labels,
-         'supports'            => array('title'),
+         'supports'            => [ 'title' ],
          'menu_icon'           => 'dashicons-admin-site',
       );
 
-      register_post_type( 'simplecopy' , $args );
+      register_post_type( SimpleCopyright()::$post_type , $args );
    }
 
    /**
@@ -99,8 +99,8 @@ class SC_Page
    public static function copyright_metabox_add() {
       add_meta_box(
          'simple-copy-metabox',
-         esc_html__( 'Copyright Options', 'simple-copy' ),
-         array( __CLASS__ , 'copyright_metabox_callback' ),
+         __( 'Copyright Options', 'simple-copy' ),
+         [ __CLASS__ , 'copyright_metabox_callback' ],
          SimpleCopyright::$post_type,
          'normal',
          'default'
