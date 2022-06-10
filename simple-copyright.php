@@ -90,8 +90,8 @@ class SimpleCopyright
    }
 
    /**
-    * Store the instance of this class
-
+    * Fetches the singleton instance of SimpleCopyright class.
+    *
     * @since 1.0.0
     * @return object
     */
@@ -154,7 +154,7 @@ class SimpleCopyright
 }
 
 /**
- * Returns the instance of SimpleCopyright
+ * Returns the instance of SimpleCopyright class.
  * 
  * @since 1.0.0
  */
