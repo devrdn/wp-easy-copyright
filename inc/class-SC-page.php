@@ -9,17 +9,12 @@ class SC_Page
 {
 
    public static $is_initialized = false;
+
+   public static $plugin_slug = 'simplecopy';
    
 
    public function __construct()
    {
-   }
-
-   public static function init()
-   {
-      if ( ! self::$is_initialized ) {
-         self::init_hooks();
-      }
    }
 
    public static function init_hooks()
@@ -59,7 +54,7 @@ class SC_Page
          'publicly_queryable' => false,
          'exclude_from_search' => false,
          'show_in_nav_menus' => false,
-         'rewrite' => [ 'slug' => 'Simple Copyright' ],
+         'rewrite' => [ 'slug' => self::$plugin_slug ],
          'has_archive' => false,
          'labels' => $labels,
          'supports' => array('title'),
@@ -72,8 +67,8 @@ class SC_Page
    public static function copyright_change_add_title( $title ) {
       $screen = get_current_screen();
 
-      if ( 'simplecopy' == $screen->post_type ) {
-         $title = esc_html__( 'Add Copyright Title' , 'simplecopy' );
+      if ( self::$plugin_slug == $screen->post_type ) {
+         $title = esc_html__( 'Add Copyright Title' , 'simple-copy' );
       }
 
       return $title;
@@ -91,33 +86,33 @@ class SC_Page
    }
 
    public static function copyright_metabox_callback( $post ) {
-      $sc_copy_text = get_post_meta( $post->ID, 'sc__copy_text', true );
-      $sc_starting_year = get_post_meta( $post->ID, 'sc__starting_year', true );
-      $sc_end_year = get_post_meta( $post->ID, 'sc__ending_year', true );
+      $sc_copy_text = get_post_meta( $post->ID, '_sc_copy_text', true );
+      $sc_starting_year = get_post_meta( $post->ID, '_sc_starting_year', true );
+      $sc_end_year = get_post_meta( $post->ID, '_sc_ending_year', true );
 
       wp_nonce_field( 'simple_copyright_metabox_save', 'simple_copyright_metabox_save_nonce' );
       ?>
          <p>
-            <label for="sc__copy_text">Copyright Text: </label>
-            <input type="text" id="sc__copy_text" name="sc__copy_text" value="<?php echo esc_html( $sc_copy_text );?>" maxlength="50">
-            <code> * <?php echo esc_html_x('Name of the enterprise / company, etc.', 'simple-copy');?></code>
-            <i><?php echo esc_html__('Max length').': 50' ?></i>
+            <label for="_sc_copy_text">Copyright Text: </label>
+            <input type="text" id="_sc_copy_text" name="_sc_copy_text" value="<?php echo esc_html( $sc_copy_text );?>" maxlength="50">
+            <code> * <?php echo esc_html_e('Name of the enterprise / company, etc.', 'simple-copy');?></code>
+            <i><?php echo esc_html_e('Max length', 'simple-copy').': 50' ?></i>
          </p>
          <p>
-            <label for="sc__starting_year">Starting Year: </label>
-            <input type="text" id="sc__starting_year" name="sc__starting_year" value="<?php echo esc_html( $sc_starting_year );?>">
-            <code> * <?php echo esc_html_x('Year must be numeric.', 'simple-copy')?> </code>
+            <label for="_sc_starting_year">Starting Year: </label>
+            <input type="text" id="_sc_starting_year" name="_sc_starting_year" value="<?php echo esc_html( $sc_starting_year );?>">
+            <code> * <?php echo esc_html_e('Year must be numeric.', 'simple-copy')?> </code>
          </p>
          <p>
-            <label for="sc__ending_year">End Year: </label>
-            <input type="text" id="sc__ending_year" name="sc__ending_year" value="<?php echo esc_html( $sc_end_year );?>">
-            <code> * <?php echo esc_html_x('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
+            <label for="_sc_ending_year">End Year: </label>
+            <input type="text" id="_sc_ending_year" name="_sc_ending_year" value="<?php echo esc_html( $sc_end_year );?>">
+            <code> * <?php echo esc_html_e('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
          </p>
          <p>
-            <label for="sc__ending_year">Copyright symbol: </label>
-            <input type="text" id="sc__ending_year" name="sc__ending_year" value="<?php echo esc_html( $sc_end_year );?>">
-            <code> * <?php echo esc_html__('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.');?> </code>
-            <i><?php echo esc_html__('Max length').': 1' ?></i>
+            <label for="">Copyright symbol: </label>
+            <input type="text" id="" name="" value="<?php echo esc_html( $sc_end_year );?>">
+            <code> * <?php echo esc_html_e('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.', 'simple-copy');?> </code>
+            <i><?php echo esc_html_e('Max length', 'simple-copy').': 1' ?></i>
          </p>
       <?php
    }
@@ -126,52 +121,52 @@ class SC_Page
 
       //check nonce fields
       if ( !isset( $_POST['simple_copyright_metabox_save_nonce'] ) || !wp_verify_nonce( $_POST['simple_copyright_metabox_save_nonce'], 'simple_copyright_metabox_save'  ) ) {
-         return $post_id;
+         return;
       }
 
       // check autosave
       if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-         return $post_id;
+         return;
       }
 
       // check if post is of type 'simplecopy'      
-      if ( $post->post_type != 'simplecopy' ) {
-         return $post_id;
+      if ( $post->post_type != self::$plugin_slug ) {
+         return;
       }
 
       // check permissions
       if ( !current_user_can( 'edit_post', $post_id ) ) {
-         return $post_id;
+         return;
       }
 
       //save copyright text
-      if ( empty( $_POST['sc__copy_text'] ) ) {
-         delete_post_meta( $post_id, 'sc__copy_text' );
+      if ( empty( $_POST['_sc_copy_text'] ) ) {
+         delete_post_meta( $post_id, '_sc_copy_text' );
       } else {
-         update_post_meta( $post_id, 'sc__copy_text', sanitize_text_field( $_POST['sc__copy_text'] ) );
+         update_post_meta( $post_id, '_sc_copy_text', sanitize_text_field( $_POST['sc__copy_text'] ) );
       }
 
       //save starting year
-      if ( empty( $_POST['sc__starting_year'] ) ) {
-         delete_post_meta( $post_id, 'sc__starting_year' );
+      if ( empty( $_POST['_sc_starting_year'] ) ) {
+         delete_post_meta( $post_id, '_sc_starting_year' );
       } else {
          //check if starting year is valid
-         if ( !is_numeric( $_POST['sc__starting_year'] ) ) {
-            delete_post_meta( $post_id, 'sc__starting_year' );
+         if ( !is_numeric( $_POST['_sc_starting_year'] ) ) {
+            delete_post_meta( $post_id, '_sc_starting_year' );
          } else {
-            update_post_meta( $post_id, 'sc__starting_year', sanitize_text_field( intval( $_POST['sc__starting_year'] ) ) );
+            update_post_meta( $post_id, '_sc_starting_year', sanitize_text_field( intval( $_POST['sc__starting_year'] ) ) );
          }
       }
 
       //save ending year
-      if ( empty( $_POST['sc__ending_year'] ) ) {
-         delete_post_meta( $post_id, 'sc__ending_year' );
+      if ( empty( $_POST['_sc_ending_year'] ) ) {
+         delete_post_meta( $post_id, '_sc_ending_year' );
       } else {
          //check if ending year is valid
-         if ( !is_numeric( $_POST['sc__ending_year'] ) ) {
-            delete_post_meta( $post_id, 'sc__ending_year' );
+         if ( !is_numeric( $_POST['_sc_ending_year'] ) ) {
+            delete_post_meta( $post_id, '_sc_ending_year' );
          } else {
-            update_post_meta( $post_id, 'sc__ending_year', sanitize_text_field( intval( $_POST['sc__ending_year'] ) ) );
+            update_post_meta( $post_id, '_sc_ending_year', sanitize_text_field( intval( $_POST['_sc_ending_year'] ) ) );
          }
       }
    }

@@ -1,8 +1,9 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-    die;
+if( !defined ( 'WP_UNINSTALL_PLUGIN' ) ) {
+   die; 
 }
+
 
 /**
  * Manage plugin uninstallation
@@ -12,16 +13,49 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class SC_Uninstall {
 
-   public function __construct() {
-      $post_to_delete = [ "post_type" => "msu-copy", 'numberposts' => -1 ];
 
-      $copyrights = get_posts( $post_to_delete );
+   /**
+    * Uninstall all data
+    *
+    * @since 1.0.0
+    */
+   public static function uninstall() {
+      
+      // delete copyrights
+      self::delete_copyright_post_type();
 
-      foreach($copyrights as $copyright) {
-         wp_delete_post($copyright->ID, true);
-      }
    }
 
+   /**
+    * Delete Copyright Post Type
+    *
+    * @since 1.0.0
+    */
+   public static function delete_copyright_post_type() {
+
+      $post_status = array (
+         'publish',
+         'draft',
+         'pending',
+         'future',
+         'private',
+         'trash',
+         'auto-draft',
+         'inherit',
+      );
+
+      $copyright_to_delete = array (
+         'post_type' => 'simplecopy',
+         'post_status' => $post_status,
+         'posts_per_page' => -1
+      );
+
+      $copyrights = get_posts( $copyright_to_delete );
+
+      foreach ( $copyrights as $copyright ) {
+         wp_delete_post( $copyright->ID, true );
+      }
+   }
 }
 
-new SC_Uninstall();
+SC_Uninstall::uninstall(); // Run uninstallation

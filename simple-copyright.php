@@ -4,10 +4,11 @@
  * Description: A plugin to manage copyright information for MSU.
  * Version: 0.0.1
  * Author: Nikken Plugins
- * Text Domain: simplecopy
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Copyright: Nikken Plugins
+ * Text Domain: simplecopy
+ * Domain Path: /lang
 */
 
 /*
@@ -36,7 +37,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'SIMPLECOPY___PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-require_once( SIMPLECOPY___PLUGIN_DIR . 'inc/class-SC-page.php' );
+if ( !class_exists( 'SC_Page' ) ) { 
+   require_once( SIMPLECOPY___PLUGIN_DIR . 'inc/class-SC-page.php' );
+}
 
 class SimpleCopyright
 {
@@ -45,6 +48,35 @@ class SimpleCopyright
 
 
    public function __construct() {}
+
+
+
+   public static function init() {
+      if ( ! self::$is_initialized ) {
+         self::init_hooks();
+         SC_Page::init_hooks();  
+      }
+   }
+
+   public static function init_hooks() {
+      self::$is_initialized = true;
+
+      // hooks for admin/front styles and scripts
+      add_action( 'admin_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_admin' ) );
+      add_action( 'wp_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_front' ) );
+
+      // hooks for loading text domain
+      add_action( 'plugins_loaded', array ( __CLASS__, 'load_simple_copyright_text_domain'));
+   }
+
+   /**
+    * Loads the text domain for the plugin.
+    *
+    * @since 1.0.0
+    */
+   public static function load_simple_copyright_text_domain() {
+      load_plugin_textdomain( 'simplecopy', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+   }
 
    public static function sc_enqueue_admin()
    {
@@ -56,21 +88,6 @@ class SimpleCopyright
    {
       wp_enqueue_style( 'sc-front-style',  plugins_url('assets/css/admin/style.css', __FILE__ ) );
       wp_enqueue_script( 'sc-front-script', plugins_url('assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true);
-   }
-
-
-   public static function init() {
-      if ( ! self::$is_initialized ) {
-         self::$is_initialized = true;
-         self::init_hooks();
-         SC_Page::init_hooks();  
-      }
-   }
-
-   public static function init_hooks() {
-      // hooks for admin/front styles and scripts
-      add_action( 'admin_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_admin' ) );
-      add_action( 'wp_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_front' ) );
    }
 
 }
