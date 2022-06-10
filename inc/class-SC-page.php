@@ -56,8 +56,8 @@ class SC_Page
          'new_item'           => __( 'New Copyright', 'simple-copy' ),
          'view_item'          => __( 'View Copyright', 'simple-copy' ),
          'search_items'       => __( 'Search Copyright', 'simple-copy' ),
-         'not_found'          => __( 'No Copyright found', 'simple-copy' ),
-         'not_found_in_trash' => __( 'No Copyright found in Trash', 'simple-copy' )
+         'not_found'          => __( 'No Copyrights found', 'simple-copy' ),
+         'not_found_in_trash' => __( 'No Copyrights found in Trash', 'simple-copy' )
       ); 
 
       $args = array(
@@ -65,7 +65,7 @@ class SC_Page
          'publicly_queryable'  => false,
          'exclude_from_search' => false,
          'show_in_nav_menus'   => false,
-         'rewrite'             => [ 'slug' => SimpleCopyright()::$plugin_slug ],
+         'rewrite'             => array( 'slug' => SimpleCopyright()::$plugin_slug ),
          'has_archive'         => false,
          'labels'              => $labels,
          'supports'            => array('title'),
