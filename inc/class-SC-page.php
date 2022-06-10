@@ -1,22 +1,33 @@
 <?php
 
 if ( ! defined( 'ABSPATH' ) ) {
-   //echo 'Привет, я просто плагин и вызываюсь, когда меня позовут!';
+   _x("Hello, i'm just plugin, and i'm called when wordpress call me!", 'simplecopy');
    die();
 }
 
 class SC_Page
 {
 
+
    public static $is_initialized = false;
 
-   public static $plugin_slug = 'simplecopy';
-   
-
-   public function __construct()
-   {
+   /**
+    * Constructor
+    * Initialize the class
+    *
+    * @since 1.0.0
+    */
+   public function __construct() {
+      if ( ! self::$is_initialized ) {
+         self::init_hooks();
+      }
    }
 
+   /**
+    * Initialize the hooks
+    *
+    * @since 1.0.0
+    */
    public static function init_hooks()
    {
       self::$is_initialized = true;
@@ -35,88 +46,111 @@ class SC_Page
    {
 
       $labels = array(
-         'name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
-         'singular_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
-         'menu_name' => esc_html__( 'Simple Copyright', 'simple-copy' ),
-         'all_items' => esc_html__( 'All Copyrights', 'simple-copy' ),
-         'add_new' => esc_html__( 'Add Copyright', 'simple-copy' ),
-         'add_new_item' => esc_html__( 'Add Copyright', 'simple-copy' ),
-         'edit_item' => esc_html__( 'Edit Copyright', 'simple-copy' ),
-         'new_item' => esc_html__( 'New Copyright', 'simple-copy' ),
-         'view_item' => esc_html__( 'View Copyright', 'simple-copy' ),
-         'search_items' => esc_html__( 'Search Copyright', 'simple-copy' ),
-         'not_found' => esc_html__( 'No Copyright found', 'simple-copy' ),
-         'not_found_in_trash' => esc_html__( 'No Copyright found in Trash', 'simple-copy' )
+         'name'               => _x( 'Simple Copyright', 'simple-copy' ),
+         'singular_name'      => _x( 'Simple Copyright', 'simple-copy' ),
+         'menu_name'          => __( 'Simple Copyright', 'simple-copy' ),
+         'all_items'          => __( 'All Copyrights', 'simple-copy' ),
+         'add_new'            => __( 'Add Copyright', 'simple-copy' ),
+         'add_new_item'       => __( 'Add Copyright', 'simple-copy' ),
+         'edit_item'          => __( 'Edit Copyright', 'simple-copy' ),
+         'new_item'           => __( 'New Copyright', 'simple-copy' ),
+         'view_item'          => __( 'View Copyright', 'simple-copy' ),
+         'search_items'       => __( 'Search Copyright', 'simple-copy' ),
+         'not_found'          => __( 'No Copyright found', 'simple-copy' ),
+         'not_found_in_trash' => __( 'No Copyright found in Trash', 'simple-copy' )
       ); 
 
       $args = array(
-         'public' => true,
-         'publicly_queryable' => false,
+         'public'              => true,
+         'publicly_queryable'  => false,
          'exclude_from_search' => false,
-         'show_in_nav_menus' => false,
-         'rewrite' => [ 'slug' => self::$plugin_slug ],
-         'has_archive' => false,
-         'labels' => $labels,
-         'supports' => array('title'),
-         'menu_icon' => 'dashicons-admin-site',
+         'show_in_nav_menus'   => false,
+         'rewrite'             => [ 'slug' => SimpleCopyright()::$plugin_slug ],
+         'has_archive'         => false,
+         'labels'              => $labels,
+         'supports'            => array('title'),
+         'menu_icon'           => 'dashicons-admin-site',
       );
 
       register_post_type( 'simplecopy' , $args );
    }
 
+   /**
+    * Change 'Add Title' text on Copyright post type
+    *
+    * @since 1.0.0
+    */
    public static function copyright_change_add_title( $title ) {
       $screen = get_current_screen();
 
-      if ( self::$plugin_slug == $screen->post_type ) {
+      if ( SimpleCopyright()::$plugin_slug == $screen->post_type ) {
          $title = esc_html__( 'Add Copyright Title' , 'simple-copy' );
       }
 
       return $title;
    }
 
+   /**
+    * Add Copyright Plugin Metabox
+    *
+    * @since 1.0.0
+    */
    public static function copyright_metabox_add() {
       add_meta_box(
          'simple-copy-metabox',
          esc_html__( 'Copyright Options', 'simple-copy' ),
-         array( __CLASS__ , 'copyright_metabox_callback' ),
-         'simplecopy',
+         [  __CLASS__ , 'copyright_metabox_callback' ],
+         SimpleCopyright::$post_type,
          'normal',
          'default'
       );
    }
 
+   /**
+    * Copyright Metabox Callback
+    *
+    * @since 1.0.0
+    */
    public static function copyright_metabox_callback( $post ) {
-      $sc_copy_text = get_post_meta( $post->ID, '_sc_copy_text', true );
-      $sc_starting_year = get_post_meta( $post->ID, '_sc_starting_year', true );
-      $sc_end_year = get_post_meta( $post->ID, '_sc_ending_year', true );
+      $sc_info = array(
+         'sc_copy_text'    => get_post_meta( $post->ID, '_sc_copy_text', true ),
+         'sc_starting_year'=> get_post_meta( $post->ID, '_sc_starting_year', true ),
+         'sc_ending_year'  => get_post_meta( $post->ID, '_sc_ending_year', true ),
+         'sc_symbol'       => get_post_meta( $post->ID, '_sc_symbol', true ),
+      );
 
       wp_nonce_field( 'simple_copyright_metabox_save', 'simple_copyright_metabox_save_nonce' );
       ?>
          <p>
             <label for="_sc_copy_text">Copyright Text: </label>
-            <input type="text" id="_sc_copy_text" name="_sc_copy_text" value="<?php echo esc_html( $sc_copy_text );?>" maxlength="50">
-            <code> * <?php echo esc_html_e('Name of the enterprise / company, etc.', 'simple-copy');?></code>
-            <i><?php echo esc_html_e('Max length', 'simple-copy').': 50' ?></i>
+            <input type="text" id="_sc_copy_text" name="_sc_copy_text" value="<?php echo esc_html( $sc_info['sc_copy_text'] );?>" maxlength="50">
+            <code> * <?php echo _e('Name of the enterprise / company, etc.', 'simple-copy');?></code>
+            <i><?php echo _e('Max length', 'simple-copy').': 50' ?></i>
          </p>
          <p>
             <label for="_sc_starting_year">Starting Year: </label>
-            <input type="text" id="_sc_starting_year" name="_sc_starting_year" value="<?php echo esc_html( $sc_starting_year );?>">
-            <code> * <?php echo esc_html_e('Year must be numeric.', 'simple-copy')?> </code>
+            <input type="text" id="_sc_starting_year" name="_sc_starting_year" value="<?php echo esc_html( $sc_info['sc_starting_year'] );?>">
+            <code> * <?php echo _e('Year must be numeric.', 'simple-copy')?> </code>
          </p>
          <p>
             <label for="_sc_ending_year">End Year: </label>
-            <input type="text" id="_sc_ending_year" name="_sc_ending_year" value="<?php echo esc_html( $sc_end_year );?>">
-            <code> * <?php echo esc_html_e('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
+            <input type="text" id="_sc_ending_year" name="_sc_ending_year" value="<?php echo esc_html( $sc_info['sc_ending_year'] );?>">
+            <code> * <?php echo _e('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
          </p>
          <p>
-            <label for="">Copyright symbol: </label>
-            <input type="text" id="" name="" value="<?php echo esc_html( $sc_end_year );?>">
-            <code> * <?php echo esc_html_e('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.', 'simple-copy');?> </code>
-            <i><?php echo esc_html_e('Max length', 'simple-copy').': 1' ?></i>
+            <label for="_sc_symbol">Copyright symbol: </label>
+            <input type="text" id="_sc_symbol" name="_sc_symbol" value="<?php echo esc_html( $sc_info['sc_symbol'] );?>">
+            <code> * <?php echo _e('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.', 'simple-copy');?> </code>
+            <i><?php echo _e('Max length', 'simple-copy').': 1' ?></i>
          </p>
       <?php
    }
 
+  /**
+   * Save Copyright Metabox
+   * 
+   * @since 1.0.0
+   */
   public static function copyright_metabox_save( $post_id, $post ) {
 
       //check nonce fields
@@ -130,7 +164,7 @@ class SC_Page
       }
 
       // check if post is of type 'simplecopy'      
-      if ( $post->post_type != self::$plugin_slug ) {
+      if ( $post->post_type != SimpleCopyright()::$plugin_slug ) {
          return;
       }
 
@@ -143,7 +177,7 @@ class SC_Page
       if ( empty( $_POST['_sc_copy_text'] ) ) {
          delete_post_meta( $post_id, '_sc_copy_text' );
       } else {
-         update_post_meta( $post_id, '_sc_copy_text', sanitize_text_field( $_POST['sc__copy_text'] ) );
+         update_post_meta( $post_id, '_sc_copy_text', sanitize_text_field( $_POST['_sc_copy_text'] ) );
       }
 
       //save starting year
@@ -154,7 +188,7 @@ class SC_Page
          if ( !is_numeric( $_POST['_sc_starting_year'] ) ) {
             delete_post_meta( $post_id, '_sc_starting_year' );
          } else {
-            update_post_meta( $post_id, '_sc_starting_year', sanitize_text_field( intval( $_POST['sc__starting_year'] ) ) );
+            update_post_meta( $post_id, '_sc_starting_year', sanitize_text_field( intval( $_POST['_sc_starting_year'] ) ) );
          }
       }
 
@@ -169,5 +203,17 @@ class SC_Page
             update_post_meta( $post_id, '_sc_ending_year', sanitize_text_field( intval( $_POST['_sc_ending_year'] ) ) );
          }
       }
+
+      //save symbol
+      if ( empty( $_POST['_sc_symbol'] ) ) {
+         delete_post_meta( $post_id, '_sc_symbol' );
+      } else {
+         if ( strlen( $_POST['_sc_symbol'] ) > 3 ) {
+            delete_post_meta( $post_id, '_sc_symbol' );
+         } else {
+            update_post_meta( $post_id, '_sc_symbol', sanitize_text_field( $_POST['_sc_symbol'] ) );
+         }
+      }
+   
    }
 }

@@ -7,7 +7,7 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Copyright: Nikken Plugins
- * Text Domain: simplecopy
+ * Text Domain: simple-copy
  * Domain Path: /lang
 */
 
@@ -29,9 +29,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Copyright 2022 Nikken Plugins, Inc.
 */
 
-
 if ( ! defined( 'ABSPATH' ) ) {
-   //echo 'Привет, я просто плагин и вызываюсь, когда меня позовут!';
+   _x("Hello, i'm just plugin, and i'm called when wordpress call me!", 'simplecopy');
    die();
 }
 
@@ -41,23 +40,74 @@ if ( !class_exists( 'SC_Page' ) ) {
    require_once( SIMPLECOPY___PLUGIN_DIR . 'inc/class-SC-page.php' );
 }
 
+if ( !class_exists( 'SimpleCopyright' ) ) :
+
 class SimpleCopyright
 {
 
+   
+   /**
+    * If the class has been initialized.
+    *
+    * @var bool
+    * @since 1.0.0
+    */
    private static $is_initialized = false;
 
+   /**
+    * Post Type Name
+    * 
+    * @since 1.0.0
+    */
+   public static $post_type = 'simplecopy';
 
-   public function __construct() {}
+   /**
+    * The slug of the plugin.
+    *
+    * @since 1.0.0
+    */
+   public static $plugin_slug = 'simplecopy';
 
+   /**
+    * The single instance of SimpleCopyright.
+    * 
+    * @var SimpleCopyright
+    * @since 1.0.0
+    */
+   public static $instance;
 
-
-   public static function init() {
+   /**
+    * Constructor
+    * Initialize the class.
+    *
+    * @since 1.0.0
+    */
+   public function __construct() {
       if ( ! self::$is_initialized ) {
          self::init_hooks();
-         SC_Page::init_hooks();  
+         new SC_Page();
       }
    }
 
+   /**
+    * Store the instance of this class
+
+    * @since 1.0.0
+    * @return object
+    */
+   public static function get_instance() {
+      if ( !self::$instance ) {
+         self::$instance = new self();
+      }
+      return self::$instance;
+   }
+
+
+   /**
+    * Initialize the hooks
+    *
+    * @since 1.0.0
+    */
    public static function init_hooks() {
       self::$is_initialized = true;
 
@@ -78,26 +128,40 @@ class SimpleCopyright
       load_plugin_textdomain( 'simplecopy', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
    }
 
+   /**
+    * Enqueue admin styles and scripts
+    *
+    * @since 1.0.0
+    */
    public static function sc_enqueue_admin()
    {
-      wp_enqueue_style( 'sc-admin-style',  plugins_url('assets/css/admin/style.css', __FILE__ ) );
-      wp_enqueue_script( 'sc-admin-script', plugins_url('assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true );
+      wp_enqueue_style( 'sc-admin-style',  plugins_url( 'assets/css/admin/style.css', __FILE__ ) );
+      wp_enqueue_script( 'sc-admin-script', plugins_url( 'assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true );
    }
 
+   /**
+    * Enqueue front styles and scripts
+    *
+    * @since 1.0.0
+    */
    public static function sc_enqueue_front()
    {
-      wp_enqueue_style( 'sc-front-style',  plugins_url('assets/css/admin/style.css', __FILE__ ) );
-      wp_enqueue_script( 'sc-front-script', plugins_url('assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true);
+      wp_enqueue_style( 'sc-front-style',  plugins_url( 'assets/css/admin/style.css', __FILE__ ) );
+      wp_enqueue_script( 'sc-front-script', plugins_url( 'assets/js/admin/script.js', __FILE__ ), array( 'jquery' ), 1.0, true);
    }
 
+   
 }
 
-add_action( 'plugins_loaded', array( 'SimpleCopyright', 'init' ) );
-
-
-/*
-if (class_exists('MsuCopy')) {
-   $msu_copy = new MsuCopy();
-   $msu_copy->init_actions();
+/**
+ * Returns the instance of SimpleCopyright
+ * 
+ * @since 1.0.0
+ */
+function SimpleCopyright() {
+   return SimpleCopyright::get_instance();
 }
-*/
+
+SimpleCopyright(); // load the class
+
+endif;
