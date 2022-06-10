@@ -30,6 +30,7 @@ class SC_Page
     */
    public static function init_hooks()
    {
+      // init hooks
       self::$is_initialized = true;
       add_action( 'init', array( __CLASS__, 'copyright_post_type_register' ) );
       add_action( 'add_meta_boxes', array( __CLASS__, 'copyright_metabox_add' ) );
@@ -99,7 +100,7 @@ class SC_Page
       add_meta_box(
          'simple-copy-metabox',
          esc_html__( 'Copyright Options', 'simple-copy' ),
-         [  __CLASS__ , 'copyright_metabox_callback' ],
+         array( __CLASS__ , 'copyright_metabox_callback' ),
          SimpleCopyright::$post_type,
          'normal',
          'default'
