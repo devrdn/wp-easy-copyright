@@ -86,12 +86,13 @@ class SimpleCopyright_Page
    /**
     * Change 'Add Title' text on Copyright post type
     *
+    * @var   string $title
     * @since 1.0.0
     */
    public static function copyright_change_add_title( $title ) {
       $screen = get_current_screen();
 
-      if ( SimpleCopyright::$plugin_slug == $screen->post_type ) {
+      if (  $screen->post_type == SimpleCopyright::$post_type ) {
          $title = esc_html__( 'Add Copyright Title' , 'simple-copy' );
       }
 
@@ -117,44 +118,69 @@ class SimpleCopyright_Page
    /**
     * Copyright Metabox Callback
     *
-    * @since 1.0.0
+    * @var     array $post
+    * @since   1.0.0
     */
    public static function copyright_metabox_callback( $post ) {
       
-      $copyright_nonce_name = 'simple_copyright_nonce_'.$post->ID;
+      $copyright_nonce_name = 'simple_copyright_nonce_'.$post->ID; // nonce name
 
-      $sc_info = array(
-         'sc_copy_text'    => get_post_meta( $post->ID, '_sc_copy_text', true ),
-         'sc_starting_year'=> get_post_meta( $post->ID, '_sc_starting_year', true ),
-         'sc_ending_year'  => get_post_meta( $post->ID, '_sc_ending_year', true ),
-         'sc_symbol'       => get_post_meta( $post->ID, '_sc_symbol', true ),
-      );
-
+      $sc_info = self::copyright_get_metabox_data( $post->ID, false ); // get data from post meta
+      
       wp_nonce_field( 'simple_copyright_metabox_save', $copyright_nonce_name );
       ?>
          <p>
             <label for="_sc_copy_text">Copyright Text: </label>
-            <input type="text" id="_sc_copy_text" name="_sc_copy_text" value="<?php echo esc_html( $sc_info['sc_copy_text'] );?>" maxlength="50">
+            <input type="text" id="_sc_copy_text" name="_sc_copy_text" value="<?php echo esc_html( $sc_info['_sc_copy_text'] );?>" maxlength="50">
             <code> * <?php echo _e('Name of the enterprise / company, etc.', 'simple-copy');?></code>
             <i><?php echo _e('Max length', 'simple-copy').': 50' ?></i>
          </p>
          <p>
             <label for="_sc_starting_year">Starting Year: </label>
-            <input type="text" id="_sc_starting_year" name="_sc_starting_year" value="<?php echo esc_html( $sc_info['sc_starting_year'] );?>">
+            <input type="number" id="_sc_starting_year" name="_sc_starting_year" value="<?php echo esc_html( $sc_info['_sc_starting_year'] );?>">
             <code> * <?php echo _e('Year must be numeric.', 'simple-copy')?> </code>
          </p>
          <p>
             <label for="_sc_ending_year">End Year: </label>
-            <input type="text" id="_sc_ending_year" name="_sc_ending_year" value="<?php echo esc_html( $sc_info['sc_ending_year'] );?>">
+            <input type="number" id="_sc_ending_year" name="_sc_ending_year" value="<?php echo esc_html( $sc_info['_sc_ending_year'] );?>">
             <code> * <?php echo _e('If year is not specified, the current year will be used.', 'simple-copy')?> </code>
          </p>
          <p>
             <label for="_sc_symbol">Copyright symbol: </label>
-            <input type="text" id="_sc_symbol" name="_sc_symbol" value="<?php echo esc_html( $sc_info['sc_symbol'] );?>">
+            <input type="text" id="_sc_symbol" name="_sc_symbol" value="<?php echo esc_html( $sc_info['_sc_symbol'] );?>">
             <code> * <?php echo _e('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.', 'simple-copy');?> </code>
             <i><?php echo _e('Max length', 'simple-copy').': 3' ?></i>
          </p>
       <?php
+   }
+
+   /**
+    * Get Copyright Metabox Data
+    *
+    * @var     int   $post_id
+    * @var     bool  $unset_fields if true, unset empty values
+    * @since   1.0.0
+    */
+   public static function copyright_get_metabox_data ( $post_id, $unset_fields = true ) {
+      
+      $fields = [
+         '_sc_copy_text',
+         '_sc_starting_year',
+         '_sc_ending_year',
+         '_sc_symbol',
+      ];      
+
+      foreach ( $fields as $field ) {
+         $sc_info[ $field ] = get_post_meta( $post_id, $field, true );
+         if ( $unset_fields ) {
+            if ( empty( $sc_info[ $field ] ) ) {
+               unset( $sc_info[ $field ] );
+            }
+            
+         }
+      }
+      
+      return $sc_info;
    }
 
   /**

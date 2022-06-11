@@ -58,6 +58,7 @@ class SimpleCopyright
       if ( ! self::$is_initialized ) {
          self::init_hooks();
          new SimpleCopyright_Page();
+         new SimpleCopyright_Shortcode();
       }
    }
 
@@ -70,11 +71,11 @@ class SimpleCopyright
       self::$is_initialized = true;
 
       // hooks for admin/front styles and scripts
-      add_action( 'admin_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_admin' ) );
-      add_action( 'wp_enqueue_scripts', array( __CLASS__ , 'sc_enqueue_front' ) );
+      add_action( 'admin_enqueue_scripts', [ __CLASS__ , 'sc_enqueue_admin' ] );
+      add_action( 'wp_enqueue_scripts', [ __CLASS__ , 'sc_enqueue_front' ] );
 
       // hooks for loading text domain
-      add_action( 'plugins_loaded', array( __CLASS__ , 'sc_load_text_domain' ) );
+      add_action( 'plugins_loaded', [ __CLASS__ , 'sc_load_text_domain' ] );
    }
 
    /**
