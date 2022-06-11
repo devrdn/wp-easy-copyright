@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: simple-copyright\n"
+"POT-Creation-Date: 2022-06-11 22:17+0300\n"
+"PO-Revision-Date: 2022-06-11 22:18+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: _x;_e;__;esc_html_x;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/class-simplecopyright-page.php:4 inc/class-simplecopyright.php:5
+#: simple-copyright.php:36
+msgid "Hello, i'm just plugin, and i'm called when wordpress call me!"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:57 inc/class-simplecopyright-page.php:58
+#: inc/class-simplecopyright-page.php:59
+msgid "Simple Copyright"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:60
+msgid "All Copyrights"
+msgstr "Все копирайты"
+
+#: inc/class-simplecopyright-page.php:61 inc/class-simplecopyright-page.php:62
+msgid "Add Copyright"
+msgstr "Добавить копирайт"
+
+#: inc/class-simplecopyright-page.php:63
+msgid "Edit Copyright"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:64
+msgid "New Copyright"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:65
+msgid "View Copyright"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:66
+msgid "Search Copyright"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:67
+msgid "No Copyrights found"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:68
+msgid "No Copyrights found in Trash"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:95
+msgid "Add Copyright Title"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:109
+msgid "Copyright Options"
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:138
+msgid "Name of the enterprise / company, etc."
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:139
+#: inc/class-simplecopyright-page.php:155
+msgid "Max length"
+msgstr "Максимальная длина"
+
+#: inc/class-simplecopyright-page.php:144
+msgid "Year must be numeric."
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:149
+msgid "If year is not specified, the current year will be used."
+msgstr ""
+
+#: inc/class-simplecopyright-page.php:154
+msgid ""
+"Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: "
+"&copy;."
+msgstr ""

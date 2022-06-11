@@ -1,14 +1,21 @@
 <?php
-
+// Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
-   _x("Hello, i'm just plugin, and i'm called when wordpress call me!", 'simplecopy');
+   _e("Hello, i'm just plugin, and i'm called when wordpress call me!", 'simple-copy');
    die();
 }
 
-class SC_Page
+if ( !class_exists( SimpleCopyright_Page::class ) ) :
+
+class SimpleCopyright_Page 
 {
 
-
+   /**
+    * If the class has been initialized.
+    *
+    * @var   bool
+    * @since 1.0.0
+    */
    public static $is_initialized = false;
 
    /**
@@ -66,14 +73,14 @@ class SC_Page
          'publicly_queryable'  => false,
          'exclude_from_search' => false,
          'show_in_nav_menus'   => false,
-         'rewrite'             => [ 'slug' => SimpleCopyright()::$plugin_slug ],
+         'rewrite'             => [ 'slug' => SimpleCopyright::$plugin_slug ],
          'has_archive'         => false,
          'labels'              => $labels,
          'supports'            => [ 'title' ],
          'menu_icon'           => 'dashicons-admin-site',
       );
 
-      register_post_type( SimpleCopyright()::$post_type , $args );
+      register_post_type( SimpleCopyright::$post_type , $args );
    }
 
    /**
@@ -84,7 +91,7 @@ class SC_Page
    public static function copyright_change_add_title( $title ) {
       $screen = get_current_screen();
 
-      if ( SimpleCopyright()::$plugin_slug == $screen->post_type ) {
+      if ( SimpleCopyright::$plugin_slug == $screen->post_type ) {
          $title = esc_html__( 'Add Copyright Title' , 'simple-copy' );
       }
 
@@ -113,6 +120,9 @@ class SC_Page
     * @since 1.0.0
     */
    public static function copyright_metabox_callback( $post ) {
+      
+      $copyright_nonce_name = 'simple_copyright_nonce_'.$post->ID;
+
       $sc_info = array(
          'sc_copy_text'    => get_post_meta( $post->ID, '_sc_copy_text', true ),
          'sc_starting_year'=> get_post_meta( $post->ID, '_sc_starting_year', true ),
@@ -120,7 +130,7 @@ class SC_Page
          'sc_symbol'       => get_post_meta( $post->ID, '_sc_symbol', true ),
       );
 
-      wp_nonce_field( 'simple_copyright_metabox_save', 'simple_copyright_metabox_save_nonce' );
+      wp_nonce_field( 'simple_copyright_metabox_save', $copyright_nonce_name );
       ?>
          <p>
             <label for="_sc_copy_text">Copyright Text: </label>
@@ -142,7 +152,7 @@ class SC_Page
             <label for="_sc_symbol">Copyright symbol: </label>
             <input type="text" id="_sc_symbol" name="_sc_symbol" value="<?php echo esc_html( $sc_info['sc_symbol'] );?>">
             <code> * <?php echo _e('Symbol to be used as copyright (e.g. &copy; (c)  ...). Default symbol: &copy;.', 'simple-copy');?> </code>
-            <i><?php echo _e('Max length', 'simple-copy').': 1' ?></i>
+            <i><?php echo _e('Max length', 'simple-copy').': 3' ?></i>
          </p>
       <?php
    }
@@ -155,23 +165,24 @@ class SC_Page
   public static function copyright_metabox_save( $post_id, $post ) {
 
       //check nonce fields
-      if ( !isset( $_POST['simple_copyright_metabox_save_nonce'] ) || !wp_verify_nonce( $_POST['simple_copyright_metabox_save_nonce'], 'simple_copyright_metabox_save'  ) ) {
-         return;
+      $copyright_nonce_name = 'simple_copyright_nonce_'.$post_id;
+      if ( !isset( $_POST[ $copyright_nonce_name ] ) || !wp_verify_nonce( $_POST[ $copyright_nonce_name ], 'simple_copyright_metabox_save'  ) ) {
+         return $post_id;
       }
 
       // check autosave
       if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-         return;
+         return $post_id;
       }
 
       // check if post is of type 'simplecopy'      
-      if ( $post->post_type != SimpleCopyright()::$plugin_slug ) {
-         return;
+      if ( $post->post_type != SimpleCopyright::$post_type ) {
+         return $post_id;
       }
 
       // check permissions
       if ( !current_user_can( 'edit_post', $post_id ) ) {
-         return;
+         return $post_id;
       }
 
       //save copyright text
@@ -218,3 +229,5 @@ class SC_Page
    
    }
 }
+
+endif; // class_exists
