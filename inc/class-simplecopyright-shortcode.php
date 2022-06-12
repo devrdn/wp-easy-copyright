@@ -17,6 +17,12 @@ if ( ! class_exists( SimpleCopyright_ShortCodes::class ) ) :
  */
 class SimpleCopyright_Shortcode
 {
+
+   // доделать лаяуты 
+   private $scpy_shortcode_layouts = [
+      'layout-1' => 'Layout 1',
+   ];
+
    public function __construct() {
       add_action( 'init', [ __CLASS__, 'copyright_register_shortcode' ] );
       add_filter( 'copyright_render_shortcode_filter', [ __CLASS__, 'copyright_render_shortcode' ], 15, 2 );
@@ -55,7 +61,41 @@ class SimpleCopyright_Shortcode
    }
 
    public static function copyright_render_shortcode( $data = array() ) { 
-      
+
+      var_dump($data);
+      $html =  '<div class="simple-copyright">';
+      $html .= '{_scpy_symbol} {_scpy_start_year} {_scpy_end_year} {_scpy_copy_name}. {_scpy_statement}';
+      $html .= '</div>';
+
+      $html = preg_replace_callback(
+         '/\{(_scpy_[a-z_]+)\}/',
+         function( $matches ) use ( $data ) {
+            $key =  $matches[1];
+            switch ( $key ) {
+               case '_scpy_symbol':
+                  return isset( $data[ $key ] ) ?  $data[ $key ] : '&copy;';
+                  break;
+               case '_scpy_start_year':
+                  return isset( $data[ $key ] ) ?  $data[ $key ].' &mdash; ' : '';
+                  break;
+               case '_scpy_end_year':
+                  return isset( $data[ $key ] ) ?  $data[ $key ] : date_i18n( 'Y' );
+                  break;
+               case '_scpy_copy_name':
+                  return isset( $data[ $key ] ) ?  $data[ $key ] : '';
+                  break;
+               case '_scpy_statement':
+                  return isset( $data[ $key ] ) ?  $data[ $key ] : 'All rights reserved.';
+                  break;
+
+               return;
+            }
+            
+            //return isset( $data[$key] ) ? $data[$key] : '';
+         },
+         $html
+      );
+      /*
       $html = '<div class="simple-copyright">';
       if (array_key_exists( '_scpy_copy_name', $data )) {
          $html .= '<span class="scpy__name"> '.$data['_scpy_copy_name'].' </span>';
@@ -81,7 +121,7 @@ class SimpleCopyright_Shortcode
       }
       $html .= ' </span>';
       $html .= ' <span class="scpy__text">All rights reserved.</span>';
-      $html .= '</div>';
+      $html .= '</div>';*/
       return $html; 
    }
 

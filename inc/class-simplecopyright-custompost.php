@@ -59,32 +59,32 @@ class SimpleCopyright_CustomPost
    public static function init_settings() {
       self::$fields = [
          '_scpy_copy_name' => [
-            'label'      => __('Copyright Name', 'simple-copy'),
-            'type'       => 'text',
-            'desc'  => __('Name of the enterprise / company, etc.', 'simple-copy'),
-            'maxlength'  => 100,
-            'class'      => '_scpy_copy_name'
+            'label'     => __('Copyright Name', 'simple-copy'),
+            'type'      => 'text',
+            'desc'      => __('Name of the enterprise / company, etc.', 'simple-copy'),
+            'maxlength' => 100,
+            'class'     => 'scpy__copy_name'
          ],
          '_scpy_start_year' => [
-            'label'      => __('Start Year', 'simple-copy'),
-            'type'       => 'number',
-            'desc'  => __( 'Copyright Start Year.', 'simple-copy' ),
-            'maxlength'  => 4,
-            'class'      => '_scpy_start_year'
+            'label'     => __('Start Year', 'simple-copy'),
+            'type'      => 'number',
+            'desc'      => __( 'Copyright Start Year.', 'simple-copy' ),
+            'maxlength' => 4,
+            'class'     => 'scpy__copy_name'
          ], 
          '_scpy_end_year' => [
             'label'      => __( 'End Year', 'simple-copy' ),
             'type'       => 'number',
-            'desc'  => __( 'Copyright End Year.', 'simple-copy' ),
+            'desc'       => __( 'Copyright End Year.', 'simple-copy' ),
             'maxlength'  => 4,
-            'class'      => '_scpy_end_year'
+            'class'      => 'scpy__end_year'
          ],
          '_scpy_symbol' => [
-            'label'      => __( 'Symbol', 'simple-copy' ),
-            'type'       => 'text',
-            'desc'  => __( 'Copyright Symbol.', 'simple-copy' ),
-            'maxlength'  => 3,
-            'class'      => '_scpy_symbol'
+            'label'     => __( 'Symbol', 'simple-copy' ),
+            'type'      => 'text',
+            'desc'      => __( 'Copyright Symbol.', 'simple-copy' ),
+            'maxlength' => 3,
+            'class'     => 'scpy__symbol'
          ],
       ];
    }
@@ -188,7 +188,7 @@ class SimpleCopyright_CustomPost
       <div class="scpy-metabox-wrap"> 
       <?php
          foreach ( self::$fields as $field_name => $field_data ) { 
-            ?>
+            ?> 
             <p class="scpy-metabox-field">
                <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
                <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'/>
