@@ -45,7 +45,7 @@ class SimpleCopyright_Shortcode
          return __( 'No such copright ID found', 'simple-copy' );
       }
 
-      $post_meta_data = SimpleCopyright_Page::copyright_get_metabox_data( $post->ID );
+      $post_meta_data = SimpleCopyright_CustomPost::copyright_get_metabox_data( $post->ID );
 
 
       $html = apply_filters( 'copyright_render_shortcode_filter', $post_meta_data );
@@ -54,30 +54,28 @@ class SimpleCopyright_Shortcode
       return $html;
    }
 
-   // Для себя, добавить get_fields в класс SC Page
-   // подумать над названием классов
    public static function copyright_render_shortcode( $data = array() ) { 
-      $html = '<div class="simple-copyright">';
       
-      if (array_key_exists( '_sc_copy_text', $data )) {
-         $html .= '<span class="scpy__name"> '.$data["_sc_copy_text"].' </span>';
+      $html = '<div class="simple-copyright">';
+      if (array_key_exists( '_scpy_copy_name', $data )) {
+         $html .= '<span class="scpy__name"> '.$data['_scpy_copy_name'].' </span>';
       }
       
-      if ( array_key_exists( '_sc_starting_year', $data) ) {
-         $html .= '<span class="scpy__starting-year"> ' . $data['_sc_starting_year'] . ' &mdash; </span>';
+      if ( array_key_exists( '_scpy_start_year', $data) ) {
+         $html .= '<span class="scpy__starting-year"> ' . $data['_scpy_start_year'] . ' &mdash; </span>';
       }
 
       $html .= '<span class="scpy__ending-year"> ';
-      if ( array_key_exists( '_sc_ending_year', $data) ) {
-         $html .= $data['_sc_ending_year'];
+      if ( array_key_exists( '_scpy_end_year', $data) ) {
+         $html .= $data['_scpy_end_year'];
       } else {
          $html .=  date_i18n( 'Y' );
       }
       $html .=  ' </span>';
       
       $html .= '<span class="scpy__copy-symbol">';
-      if ( array_key_exists( '_sc_symbol', $data) ) {
-         $html .=  $data['_sc_symbol'];
+      if ( array_key_exists( '_scpy_symbol', $data) ) {
+         $html .=  $data['_scpy_symbol'];
       } else {
          $html .= '&copy;';
       }

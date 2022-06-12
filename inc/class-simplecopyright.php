@@ -57,7 +57,7 @@ class SimpleCopyright
    public function __construct() {
       if ( ! self::$is_initialized ) {
          self::init_hooks();
-         new SimpleCopyright_Page();
+         new SimpleCopyright_CustomPost();
          new SimpleCopyright_Shortcode();
       }
    }

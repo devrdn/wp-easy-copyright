@@ -41,8 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'SIMPLECOPYRIGHT__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SIMPLECOPYRIGHT__LANGUAGE_DIR', dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
-
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-page.php' );
+// Require includes files for the plugin.
+require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-custompost.php' );
 
 require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-shortcode.php' );
 
