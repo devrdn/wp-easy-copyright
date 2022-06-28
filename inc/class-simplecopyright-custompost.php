@@ -167,6 +167,7 @@ class SimpleCopyright_CustomPost
       $post = get_post($post_id);
 
       switch ( $column ) {
+         
          case 'shortcode':
             if ( 'publish' == $post->post_status ) {
                echo '<code>[simple-copyright id="'.$post_id.'"]</code>';
@@ -178,7 +179,7 @@ class SimpleCopyright_CustomPost
             echo '&nbsp;';
             the_modified_time();
             break;
-            
+
       }
    }
 
