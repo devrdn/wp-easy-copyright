@@ -51,6 +51,10 @@ class SimpleCopyright_CustomPost
       add_action( 'add_meta_boxes', [ __CLASS__, 'copyright_metabox_add' ], 100 );
       add_filter( 'enter_title_here', [ __CLASS__, 'copyright_change_add_title' ] );
       add_action( 'save_post', [ __CLASS__, 'copyright_metabox_save' ], 10, 2 );
+      
+      // custom column hooks
+      add_filter( 'manage_simplecopy_posts_columns', [ __CLASS__, 'copyright_filter_post_columns' ] );
+      add_action( 'manage_simplecopy_posts_custom_column', [ __CLASS__, 'copyright_post_columns_data' ], 10, 2 );
    }
 
    /**
@@ -140,6 +144,42 @@ class SimpleCopyright_CustomPost
    }
 
    /**
+    * Customize the post columns for simple-copyright post type
+    *
+    * @return array $columns
+    * @since 1.0.0
+    */
+   public static function copyright_filter_post_columns( $columns ) {
+      $columns['shortcode'] = __( 'Shortcode', 'simple-copy' );
+      $columns['modified']  = __('Last Modified', 'simple-copy');
+      return $columns;
+   }
+
+   /**
+    * Add data to the custom columns to the simple-copyright post type
+    * 
+    * @param string  $column  Name of the colums
+    * @param int     $post_id Current post ID
+    *
+    * @since 1.0.0
+    */
+   public static function copyright_post_columns_data( $column, $post_id ) {
+      $post = get_post($post_id);
+      switch ( $column ) {
+         case 'shortcode':
+            if ( 'publish' == $post->post_status ) {
+               echo '<code>[simple-copyright id="'.$post_id.'"]</code>';
+            }
+            break;
+         case 'modified':
+            the_modified_date();
+            echo '&nbsp;';
+            the_modified_time();
+            break;
+      }
+   }
+
+   /**
     * Change 'Add Title' text on Copyright post type
     *
     * @var   string $title
@@ -171,16 +211,6 @@ class SimpleCopyright_CustomPost
          'normal',
          'default'
       );
-
-      // metabox for shortcode 
-      /*add_meta_box(
-         'simple-copy-metabox-shortcode',
-         __( 'Shortcode', 'simple-copy' ),
-         [ __CLASS__ , 'copyright_metabox_callback' ],
-         SimpleCopyright::$post_type,
-         'side',
-         'low'
-      );*/
    }
 
    /**

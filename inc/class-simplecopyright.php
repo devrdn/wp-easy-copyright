@@ -78,6 +78,7 @@ class SimpleCopyright
       add_action( 'plugins_loaded', [ __CLASS__ , 'sc_load_text_domain' ] );
    }
 
+
    /**
     * Loads the text domain for the plugin.
     *
