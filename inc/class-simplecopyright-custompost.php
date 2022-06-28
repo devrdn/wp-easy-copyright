@@ -165,17 +165,20 @@ class SimpleCopyright_CustomPost
     */
    public static function copyright_post_columns_data( $column, $post_id ) {
       $post = get_post($post_id);
+
       switch ( $column ) {
          case 'shortcode':
             if ( 'publish' == $post->post_status ) {
                echo '<code>[simple-copyright id="'.$post_id.'"]</code>';
             }
             break;
+
          case 'modified':
             the_modified_date();
             echo '&nbsp;';
             the_modified_time();
             break;
+            
       }
    }
 
