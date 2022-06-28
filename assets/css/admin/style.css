@@ -1,0 +1,124 @@
+/*
+ * Metabox CSS
+*/
+#simple-copy-metabox {
+  border: 1px solid #5ea8fc;
+}
+
+#simple-copy-metabox .postbox-header {
+  background-color: #5ea8fc;
+  border: 1px solid #539ff6;
+}
+
+#simple-copy-metabox .postbox-header .hndle {
+  color: #fdfdfd;
+}
+
+#simple-copy-metabox .scpy-metabox-field {
+  padding-left: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#simple-copy-metabox .scpy-metabox-field:first-child {
+  margin-top: 15px;
+}
+
+#simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__label {
+  width: 150px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (min-width: 1200px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copy_name {
+    width: 200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copy_name {
+    width: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_extra_text {
+    width: 200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_extra_text {
+    width: 400px;
+  }
+}
+
+#simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options .scpy-metabox-field__desc {
+  color: #808080;
+  font-weight: 500;
+  -webkit-text-decoration: wavy;
+          text-decoration: wavy;
+  margin-top: 5px;
+}
+
+#simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options input {
+  outline: 0 !important;
+  outline-offset: 0 !important;
+}
+
+#simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options input:focus {
+  -webkit-box-shadow: 0 0 0 1px #5ea8fc !important;
+          box-shadow: 0 0 0 1px #5ea8fc !important;
+  border: 1px solid #5ea8fc;
+}
+
+#simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options input:active {
+  outline: none !important;
+}
+
+#simple-copy-metabox .scpy-metabox-field:not(:last-child) {
+  margin-bottom: 17px;
+}
+
+/*
+ * ShortCode CSS
+*/
+.scpy-shortcode {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #539ff6;
+}
+
+.scpy-shortcode:first-child {
+  margin-bottom: 30px;
+  color: white;
+}
+
+.scpy-shortcode input {
+  display: block;
+  padding: 6px;
+  width: 100%;
+  outline: none !important;
+  outline-offset: 0 !important;
+  background-color: #5ea8fc !important;
+  color: white;
+  border: 1px solid #539ff6;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: Consolas, 'Courier New', monospace, Monaco;
+}
+
+.scpy-shortcode input:focus {
+  outline: none;
+}
+
+.scpy-shortcode input:first-child {
+  margin-bottom: 10px;
+}

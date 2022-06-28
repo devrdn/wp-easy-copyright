@@ -1,0 +1,191 @@
+$primary-color: #5ea8fc;
+$secondary-color: #539ff6;
+$primary-text-color: #fdfdfd;
+$desc-text-color:#808080;
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 320px;
+$screen-sm-max: 480px;
+
+// Small tablets (portrait view)
+$screen-md-min: 481px;
+$screen-md-max: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 769px;
+$screen-lg-max: 1024px;
+
+// Large tablets and desktops
+$screen-xl-min: 1025px;
+$screen-xl-max: 1200px;
+
+$screen-xxl-min: 1600px;
+
+
+
+@mixin sm {
+   @media (max-width: #{$screen-sm-max}) {
+       @content;
+   }
+}
+
+
+@mixin sm {
+   @media (min-width: #{$screen-sm-max}) {
+       @content;
+   }
+}
+
+// Medium devices
+@mixin md {
+   @media (min-width: #{$screen-md-max}) {
+       @content;
+   }
+}
+
+// Large devices
+@mixin lg {
+   @media (min-width: #{$screen-lg-max}) {
+       @content;
+   }
+}
+
+// Extra large devices
+@mixin xl {
+   @media (min-width: #{$screen-xl-max}) {
+       @content;
+   }
+}
+
+// Extra Extra large devices
+@mixin xxl {
+   @media (min-width: #{$screen-xxl-min}) {
+       @content;
+   }
+}
+
+/*
+ * Metabox CSS
+*/
+#simple-copy-metabox {
+
+   border: 1px solid $primary-color;
+
+   .postbox-header {
+
+      background-color: $primary-color;
+      border: 1px solid $secondary-color;
+
+      .hndle {
+         color: $primary-text-color;
+      }
+   }
+
+   .scpy-metabox-field {
+      padding-left: 5px;
+      display: flex;
+      align-items:flex-start;
+
+      &:first-child {
+         margin-top: 15px;
+      }
+
+      .scpy-metabox-field__label {
+         width: 150px;
+         font-weight: 600;
+         font-size: 14px;
+      }
+
+      .scpy-metabox-field__options {
+         #_scpy_copy_name {
+            @include xl {
+               width: 200px;
+            }
+
+            @include xxl {
+               width: 400px;
+            }
+         }
+
+         #_scpy_extra_text {
+            @include xl {
+               width: 200px;
+            }
+
+            @include xxl {
+               width: 400px;
+            }
+         }
+
+         .scpy-metabox-field__desc {
+            color: $desc-text-color;
+            font-weight: 500;
+            text-decoration: wavy;
+            margin-top: 5px;
+         }
+
+         input {
+            outline: 0 !important;
+            outline-offset: 0 !important;
+            
+            &:focus {
+               box-shadow: 0 0 0 1px $primary-color !important;
+               border: 1px solid $primary-color;
+            }
+
+            &:active {
+               outline:none !important;
+            }
+         }
+
+      }
+
+   }
+
+
+   .scpy-metabox-field:not(:last-child) {
+      margin-bottom: 17px;
+   }
+}
+
+/*
+ * ShortCode CSS
+*/
+
+
+.scpy-shortcode {
+   margin-top: 10px;
+   padding: 10px;
+   background-color: white;
+   border: 1px solid $secondary-color;
+
+   &:first-child {
+      margin-bottom: 30px;
+      color: white;
+   }
+
+   & input {
+      display: block;
+      padding: 6px;
+      width: 100%;
+      outline: none !important;
+      outline-offset: 0 !important;
+      background-color: $primary-color !important;
+      color: white;
+      border: 1px solid $secondary-color;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 15px;
+      font-family:   Consolas, 'Courier New', monospace, Monaco;
+      &:focus {
+         outline: none;
+      }
+
+      &:first-child {
+         margin-bottom: 10px;
+      }
+
+   }
+
+   
+}

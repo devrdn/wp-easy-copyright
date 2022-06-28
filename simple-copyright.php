@@ -39,6 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Constants
 define( 'SIMPLECOPYRIGHT__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SIMPLECOPYRIGHT__ASSETS_DIR', plugins_url( 'assets', __FILE__) );
 define( 'SIMPLECOPYRIGHT__LANGUAGE_DIR', dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 // Require includes files for the plugin.

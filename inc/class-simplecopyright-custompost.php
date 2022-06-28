@@ -61,31 +61,43 @@ class SimpleCopyright_CustomPost
          '_scpy_copy_name' => [
             'label'     => __('Copyright Name', 'simple-copy'),
             'type'      => 'text',
-            'desc'      => __('Name of the enterprise / company, etc.', 'simple-copy'),
+            'desc'      => __('Name of the enterprise / company, etc', 'simple-copy'),
             'maxlength' => 100,
+            'default'   => 'none',
             'class'     => 'scpy__copy_name'
          ],
          '_scpy_start_year' => [
             'label'     => __('Start Year', 'simple-copy'),
             'type'      => 'number',
-            'desc'      => __( 'Copyright Start Year.', 'simple-copy' ),
+            'desc'      => __( 'Copyright Start Year', 'simple-copy' ),
             'maxlength' => 4,
+            'default'   => 'none',
             'class'     => 'scpy__copy_name'
          ], 
          '_scpy_end_year' => [
             'label'      => __( 'End Year', 'simple-copy' ),
             'type'       => 'number',
-            'desc'       => __( 'Copyright End Year.', 'simple-copy' ),
+            'desc'       => __( 'Copyright End Year', 'simple-copy' ),
             'maxlength'  => 4,
+            'default'    => 'Current Year',
             'class'      => 'scpy__end_year'
          ],
          '_scpy_symbol' => [
             'label'     => __( 'Symbol', 'simple-copy' ),
             'type'      => 'text',
-            'desc'      => __( 'Copyright Symbol.', 'simple-copy' ),
+            'desc'      => __( 'Copyright Symbol', 'simple-copy' ),
             'maxlength' => 3,
+            'default'   => '&copy;',
             'class'     => 'scpy__symbol'
          ],
+         '_scpy_extra_text' => [
+            'label'     => __( 'Extra Text', 'simple-copy' ),
+            'type'      => 'text',
+            'desc'      => __( 'Copyright extra text (e.g. all rights reserved)', 'simple-copy' ),
+            'maxlength' => 100,
+            'default'   => 'All Rights Reserved',
+            'class'     => 'scpy__extra_text'
+         ]
       ];
    }
 
@@ -161,14 +173,14 @@ class SimpleCopyright_CustomPost
       );
 
       // metabox for shortcode 
-      add_meta_box(
+      /*add_meta_box(
          'simple-copy-metabox-shortcode',
          __( 'Shortcode', 'simple-copy' ),
          [ __CLASS__ , 'copyright_metabox_callback' ],
          SimpleCopyright::$post_type,
          'side',
          'low'
-      );
+      );*/
    }
 
    /**
@@ -189,16 +201,26 @@ class SimpleCopyright_CustomPost
       <?php
          foreach ( self::$fields as $field_name => $field_data ) { 
             ?> 
-            <p class="scpy-metabox-field">
-               <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
-               <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'/>
-               <code> * <?php echo $field_data['desc']; ?></code>
-               <?php
-                  if ( isset( $field_data['maxlength'] ) ) { ?>
-                     <i><?php _e('Max Length: ', 'simple-copy'); echo $field_data['maxlength']; ?></i>
-                  <?php }
-               ?>
-            </p>
+            <div class="scpy-metabox-field">
+               <div class="scpy-metabox-field__label">
+                  <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
+               </div>
+               <div class="scpy-metabox-field__options">
+                  <div class="scpy-metabox-field__input">
+                     <?php
+                        if ($field_data['type'] !== 'textarea') : ?>
+                           <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
+                              name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
+                              maxlength='<?php echo $field_data['maxlength']; ?>'
+                           />
+                        <?php endif; ?>
+                     <span>Default: <code><?php echo $field_data['default']; ?></code></span>
+                  </div>
+                  <div class="scpy-metabox-field__desc">
+                     <span> * <?php echo $field_data['desc']; ?></span>
+                  </div>
+               </div>
+            </div>
          <?php
          }
       ?>
