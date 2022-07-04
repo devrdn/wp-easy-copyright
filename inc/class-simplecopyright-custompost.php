@@ -171,6 +171,8 @@ class SimpleCopyright_CustomPost
          case 'shortcode':
             if ( 'publish' == $post->post_status ) {
                echo '<code>[simple-copyright id="'.$post_id.'"]</code>';
+            } else {
+               _e( 'Save copyright in order to see shortcode', 'simple-copy' );
             }
             break;
 
