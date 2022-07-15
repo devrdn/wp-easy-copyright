@@ -31,6 +31,7 @@
  * Domain Path: /lang
  */
 
+
 // Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
    _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');

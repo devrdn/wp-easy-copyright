@@ -1,4 +1,4 @@
-s<?php
+<?php
 
 // Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
    die();
 }
 
-if ( ! class_exists( SimpleCopyright_ShortCodes::class ) ) :
+if ( ! class_exists( SimpleCopyright_Shortcode::class ) ) :
 
 /**
  * Copyright Shortcode Class
@@ -19,7 +19,9 @@ class SimpleCopyright_Shortcode
 {
 
    /**
-    * 
+    * Init hooks and filters
+    *
+    * @since 1.0.0
     */
    public function __construct() {
       add_action( 'init', [ __CLASS__, 'copyright_register_shortcode' ] );
@@ -28,14 +30,20 @@ class SimpleCopyright_Shortcode
    }
 
    /**
-    * 
+    * Register Copyright shortcode
+    *
+    * @since 1.0.0
     */
    public static function copyright_register_shortcode() {
       add_shortcode( 'simple-copyright', [ __CLASS__, 'copyright_shortcode' ] );
    }
 
    /**
-    * 
+    * Build copyright shortcode
+    *
+    * @param   array  $raw_atts  shortcode attributes
+    * @return  string $html      html code of copyright
+    * @since   1.0.0
     */
    public static function copyright_shortcode($raw_atts = array())
    {
@@ -67,16 +75,20 @@ class SimpleCopyright_Shortcode
 
    /**
     * Copyright shortcode callback
+    *
+    * @param   array  $data      copyright data
+    * @return  string $html      html code of copyright
+    * @since   1.0.0
     */
    public static function copyright_render_shortcode( $data = array() ) { 
 
 
       $html  =  '<div class="simple-copyright">';
       $html .= '<span class="scpy__symbol">{_scpy_symbol} </span>';
-      $html .= '<span class="scpy__startyear">{_scpy_start_year} </span>';
-      $html .= '<span class="scpy__endyear">{_scpy_end_year} </span>';
+      $html .= '<span class="scpy__startyear">{_scpy_start_year}&nbsp;</span>';
+      $html .= '<span class="scpy__endyear">{_scpy_end_year}&nbsp;</span>';
       $html .= '<span class="scpy__name">{_scpy_copy_name}</span>';
-      $html .= '<span class="scpy__extra">. {_scpy_extra_text}</span>';
+      $html .= '<span class="scpy__extra">.&nbsp;{_scpy_extra_text}</span>';
       $html .= '</div>';
 
       // replace copyright data
@@ -88,7 +100,7 @@ class SimpleCopyright_Shortcode
 
             if ( isset( $data[ $key ] ) ) {
                if ( $key == '_scpy_start_year' ) {
-                  return $data[ $key ].'&mdash;';
+                  return $data[ $key ].'&nbsp;&mdash;';
                }
                return $data[ $key ];
             }
@@ -114,13 +126,14 @@ class SimpleCopyright_Shortcode
    }
 
    /**
-    * Shows the Shortcode to user
+    * Shows the Shortcode to user,
+    * when post is published
     *
     * @since 1.0.0
     */
    public static function copyright_show_shortcode( $post ) {
       if ( $post->post_type === SimpleCopyright::$post_type ) {
-         if ($post->post_status == 'publish') {
+         if ( $post->post_status == 'publish' ) {
       ?>
          <div class='scpy-shortcode'>
             <input readonly onclick="this.select();" value="[simple-copyright id='<?echo $post->ID; ?>']">   

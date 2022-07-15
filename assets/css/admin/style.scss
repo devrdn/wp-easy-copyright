@@ -1,7 +1,8 @@
 $primary-color: #5ea8fc;
 $secondary-color: #539ff6;
+$active-tab-color: #0876f350;
 $primary-text-color: #fdfdfd;
-$desc-text-color:#808080;
+$desc-text-color: #808080;
 
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 320px;
@@ -21,46 +22,81 @@ $screen-xl-max: 1200px;
 
 $screen-xxl-min: 1600px;
 
-
-
 @mixin sm {
    @media (max-width: #{$screen-sm-max}) {
-       @content;
+      @content;
    }
 }
 
-
 @mixin sm {
    @media (min-width: #{$screen-sm-max}) {
-       @content;
+      @content;
    }
 }
 
 // Medium devices
 @mixin md {
    @media (min-width: #{$screen-md-max}) {
-       @content;
+      @content;
    }
 }
 
 // Large devices
 @mixin lg {
    @media (min-width: #{$screen-lg-max}) {
-       @content;
+      @content;
    }
 }
 
 // Extra large devices
 @mixin xl {
    @media (min-width: #{$screen-xl-max}) {
-       @content;
+      @content;
    }
 }
 
 // Extra Extra large devices
 @mixin xxl {
    @media (min-width: #{$screen-xxl-min}) {
-       @content;
+      @content;
+   }
+}
+
+/*
+ * Tabs CSS
+*/
+.tabs {
+   .tabs-trigger {
+      display: flex;
+      padding-left: 12px;
+      background-color: $primary-color;
+      border-bottom: 1px solid $secondary-color;
+      .tabs-trigger__item {
+         color: white;
+         text-decoration: none;
+         padding: 10px;
+         font-weight: 400;
+         &:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+         }
+      }
+      .active-trigger {
+         background-color: $active-tab-color;
+      }
+   }
+
+   .tabs-content {
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-bottom: 12px;
+      .tabs-content__item {
+         display: none;
+      }
+      .active-tab {
+         display: block;
+      }
    }
 }
 
@@ -68,23 +104,29 @@ $screen-xxl-min: 1600px;
  * Metabox CSS
 */
 #simple-copy-metabox {
-
    border: 1px solid $primary-color;
 
    .postbox-header {
-
       background-color: $primary-color;
-      border: 1px solid $secondary-color;
-
+      
+      border-top: 1px solid $secondary-color;
+      border-right: 1px solid $secondary-color;
+      border-left: 1px solid $secondary-color;
+      
+      border-bottom: 0px;
       .hndle {
          color: $primary-text-color;
       }
    }
 
+   .inside {
+      margin-top: 0;
+      padding: 0;
+   }
    .scpy-metabox-field {
       padding-left: 5px;
       display: flex;
-      align-items:flex-start;
+      align-items: flex-start;
 
       &:first-child {
          margin-top: 15px;
@@ -127,21 +169,18 @@ $screen-xxl-min: 1600px;
          input {
             outline: 0 !important;
             outline-offset: 0 !important;
-            
+
             &:focus {
                box-shadow: 0 0 0 1px $primary-color !important;
                border: 1px solid $primary-color;
             }
 
             &:active {
-               outline:none !important;
+               outline: none !important;
             }
          }
-
       }
-
    }
-
 
    .scpy-metabox-field:not(:last-child) {
       margin-bottom: 17px;
@@ -151,7 +190,6 @@ $screen-xxl-min: 1600px;
 /*
  * ShortCode CSS
 */
-
 
 .scpy-shortcode {
    margin-top: 10px;
@@ -176,7 +214,7 @@ $screen-xxl-min: 1600px;
       border-radius: 5px;
       font-weight: 600;
       font-size: 15px;
-      font-family:   Consolas, 'Courier New', monospace, Monaco;
+      font-family: Consolas, "Courier New", monospace, Monaco;
       &:focus {
          outline: none;
       }
@@ -184,8 +222,5 @@ $screen-xxl-min: 1600px;
       &:first-child {
          margin-bottom: 10px;
       }
-
    }
-
-   
 }

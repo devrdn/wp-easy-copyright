@@ -232,34 +232,46 @@ class SimpleCopyright_CustomPost
       
       wp_nonce_field( 'simple_copyright_metabox_save', $copyright_nonce_name );
       ?>
+                 
 
       <div class="scpy-metabox-wrap"> 
-      <?php
-         foreach ( self::$fields as $field_name => $field_data ) { 
-            ?> 
-            <div class="scpy-metabox-field">
-               <div class="scpy-metabox-field__label">
-                  <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
-               </div>
-               <div class="scpy-metabox-field__options">
-                  <div class="scpy-metabox-field__input">
-                     <?php
-                        if ($field_data['type'] !== 'textarea') : ?>
-                           <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                              name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
-                              maxlength='<?php echo $field_data['maxlength']; ?>'
-                           />
-                        <?php endif; ?>
-                     <span>Default: <code><?php echo $field_data['default']; ?></code></span>
-                  </div>
-                  <div class="scpy-metabox-field__desc">
-                     <span> * <?php echo $field_data['desc']; ?></span>
-                  </div>
-               </div>
+         <div class="tabs">
+            <div class="tabs-trigger">
+               <a href="#scpy-form" class="tabs-trigger__item active-trigger">Information</a>
+               <a href="#scpy-order" class="tabs-trigger__item">Item Order</a>
             </div>
-         <?php
-         }
-      ?>
+            <div class="tabs-content">
+               <div id="scpy-form" class="tabs-content__item active-tab">
+                  <?php
+                     foreach ( self::$fields as $field_name => $field_data ) { 
+                        ?> 
+                        <div class="scpy-metabox-field">
+                           
+                              <div class="scpy-metabox-field__label">
+                                 <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
+                              </div>
+                              <div class="scpy-metabox-field__options">
+                                 <div class="scpy-metabox-field__input">
+                                       <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
+                                          name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
+                                          maxlength='<?php echo $field_data['maxlength']; ?>'
+                                       />
+                                    <span>Default: <code><?php echo $field_data['default']; ?></code></span>
+                                 </div>
+                                 <div class="scpy-metabox-field__desc">
+                                    <span> * <?php echo $field_data['desc']; ?></span>
+                                 </div>
+                              </div>
+                        </div>
+                     <?php
+                     }
+                  ?>
+               </div>
+               <div id="scpy-order" class="tabs-content__item">
+                  Hey!
+               </div>  
+            </div>
+         </div>
       </div>
       <?php
    }

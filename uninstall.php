@@ -11,7 +11,7 @@ if( !defined ( 'WP_UNINSTALL_PLUGIN' ) ) {
  * 
  * @since 1.0.0
  */
-class SC_Uninstall {
+class SimpleCopyright_Uninstall {
 
    /**
     * All WordPress Post Status
@@ -82,4 +82,4 @@ class SC_Uninstall {
 
 } 
 
-SC_Uninstall::uninstall(); // Run uninstallation
+SimpleCopyright_Uninstall::uninstall(); // Run uninstallation

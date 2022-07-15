@@ -96,7 +96,7 @@ class SimpleCopyright
    public static function sc_enqueue_admin()
    {
       wp_enqueue_style( 'sc-admin-style',  SIMPLECOPYRIGHT__ASSETS_DIR.'/css/admin/style.css' );
-      wp_enqueue_script( 'sc-admin-script', SIMPLECOPYRIGHT__ASSETS_DIR.'assets/js/admin/script.js', array( 'jquery' ), 1.0, true );
+      wp_enqueue_script( 'sc-admin-script', SIMPLECOPYRIGHT__ASSETS_DIR.'/js/admin/scpy-tabs.js', array(), 1.0, 'in_footer' );
    }
 
    /**
@@ -106,8 +106,8 @@ class SimpleCopyright
     */
    public static function sc_enqueue_front()
    {
-      wp_enqueue_style( 'sc-front-style',  SIMPLECOPYRIGHT__ASSETS_DIR.'assets/css/admin/style.css' );
-      wp_enqueue_script( 'sc-front-script', SIMPLECOPYRIGHT__ASSETS_DIR.'assets/js/admin/script.js', array( 'jquery' ), 1.0, true);
+      wp_enqueue_style( 'sc-front-style',  SIMPLECOPYRIGHT__ASSETS_DIR.'assets/css/front/style.css' );
+      wp_enqueue_script( 'sc-front-script', SIMPLECOPYRIGHT__ASSETS_DIR.'assets/js/front/script.js', array( 'jquery' ), 1.0, true);
    }
 
 }

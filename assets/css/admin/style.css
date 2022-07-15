@@ -1,4 +1,48 @@
 /*
+ * Tabs CSS
+*/
+.tabs .tabs-trigger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 12px;
+  background-color: #5ea8fc;
+  border-bottom: 1px solid #539ff6;
+}
+
+.tabs .tabs-trigger .tabs-trigger__item {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.tabs .tabs-trigger .tabs-trigger__item:focus {
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.tabs .tabs-trigger .active-trigger {
+  background-color: #0876f350;
+}
+
+.tabs .tabs-content {
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+}
+
+.tabs .tabs-content .tabs-content__item {
+  display: none;
+}
+
+.tabs .tabs-content .active-tab {
+  display: block;
+}
+
+/*
  * Metabox CSS
 */
 #simple-copy-metabox {
@@ -7,11 +51,19 @@
 
 #simple-copy-metabox .postbox-header {
   background-color: #5ea8fc;
-  border: 1px solid #539ff6;
+  border-top: 1px solid #539ff6;
+  border-right: 1px solid #539ff6;
+  border-left: 1px solid #539ff6;
+  border-bottom: 0px;
 }
 
 #simple-copy-metabox .postbox-header .hndle {
   color: #fdfdfd;
+}
+
+#simple-copy-metabox .inside {
+  margin-top: 0;
+  padding: 0;
 }
 
 #simple-copy-metabox .scpy-metabox-field {
@@ -112,7 +164,7 @@
   border-radius: 5px;
   font-weight: 600;
   font-size: 15px;
-  font-family: Consolas, 'Courier New', monospace, Monaco;
+  font-family: Consolas, "Courier New", monospace, Monaco;
 }
 
 .scpy-shortcode input:focus {
