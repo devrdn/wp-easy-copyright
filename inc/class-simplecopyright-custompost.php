@@ -238,7 +238,7 @@ class SimpleCopyright_CustomPost
          <div class="tabs">
             <div class="tabs-trigger">
                <a href="#scpy-form" class="tabs-trigger__item active-trigger">Information</a>
-               <a href="#scpy-order" class="tabs-trigger__item">Item Order</a>
+               <a href="#scpy-order" class="tabs-trigger__item">Items Order</a>
             </div>
             <div class="tabs-content">
                <div id="scpy-form" class="tabs-content__item active-tab">
