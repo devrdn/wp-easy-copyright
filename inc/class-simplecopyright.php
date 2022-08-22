@@ -1,6 +1,7 @@
 <?php
 
 // Die if this file is called directly.
+
 if ( ! defined( 'ABSPATH' ) ) {
    _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');
    die();
@@ -62,6 +63,10 @@ class SimpleCopyright
       }
    }
 
+   public static function register_widget() {
+      register_widget('simplecopyright_widget');
+   } 
+
    /**
     * Initialize the hooks
     *
@@ -76,6 +81,8 @@ class SimpleCopyright
 
       // hooks for loading text domain
       add_action( 'plugins_loaded', [ __CLASS__ , 'sc_load_text_domain' ] );
+
+      add_action ( 'widgets_init', [ __CLASS__, 'register_widget'] );
    }
 
 

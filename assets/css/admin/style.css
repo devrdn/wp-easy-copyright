@@ -174,3 +174,12 @@
 .scpy-shortcode input:first-child {
   margin-bottom: 10px;
 }
+
+.scpy-widget {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.scpy-widget .scpy-widget__id {
+  margin-top: 10px;
+}
