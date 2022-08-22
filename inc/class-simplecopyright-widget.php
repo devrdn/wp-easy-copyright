@@ -45,7 +45,7 @@ class SimpleCopyright_Widget extends WP_Widget {
 
       // echo copyright
       $id = $instance['id'];
-      echo do_shortcode('[simple-copyright id="'.$id.'"]');
+      echo do_shortcode( '[simple-copyright id="'.$id.'"]' );
 
       echo $args['after_widget'];
    }
@@ -56,7 +56,7 @@ class SimpleCopyright_Widget extends WP_Widget {
     * @since   0.0.1
     */
    public function form($instance) {
-      $id = isset($instance['id']) ? $instance['id'] : '';
+      $id = isset( $instance['id'] ) ? $instance['id'] : '';
       ?>
          <div class="scpy-widget">
             <label for="<?php echo $this->get_field_id('id'); ?>">Copyright ID: </label>
