@@ -19,11 +19,16 @@ class SimpleCopyright_CustomPost
    public static $is_initialized = false;
 
    /**
-    * Fields for the metabox.
+    * Fields for the `information section`  metabox.
     *
     * @since 1.0.0
     */
-   private static $fields;
+   private static $fields_information;
+
+   /**
+    * Fields for the `items order section`  metabox.
+    */
+   private static $fields_order;
    
    /**
     * Constructor
@@ -61,7 +66,7 @@ class SimpleCopyright_CustomPost
     * Init Settings
     */
    public static function init_settings() {
-      self::$fields = [
+      self::$fields_information = [
          '_scpy_copy_name' => [
             'label'     => __('Copyright Name', 'simple-copy'),
             'type'      => 'text',
@@ -101,6 +106,24 @@ class SimpleCopyright_CustomPost
             'maxlength' => 100,
             'default'   => 'All Rights Reserved',
             'class'     => 'scpy__extra_text'
+         ]
+      ];
+
+      self::$fields_order = [
+         '_scpy_item_order' => [
+            'label'     => __( 'Item Order', 'simple-copy' ),
+            'type'      => 'text',
+            'desc'      => __( 'Copyright information order', 'simple-copy' ),
+            'maxlength' => 300,
+            'default'   => '[symbol] [start-year]-[end-year] [copyright-name]. [extra-text].',
+            'class'     => 'scpy__item_order',
+            'info'      => [
+               'copyright-name'  => 'Name of the enterprise / company, etc',
+               'start-year'      => 'Copyright Start Year',
+               'end-year'        => 'Copyright End Year',
+               'symbol'          => 'Copyright Symbol',
+               'extra-text'      => 'Copyright extra text'
+            ]
          ]
       ];
    }
@@ -243,32 +266,59 @@ class SimpleCopyright_CustomPost
             <div class="tabs-content">
                <div id="scpy-form" class="tabs-content__item active-tab">
                   <?php
-                     foreach ( self::$fields as $field_name => $field_data ) { 
-                        ?> 
-                        <div class="scpy-metabox-field">
-                           
-                              <div class="scpy-metabox-field__label">
-                                 <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
-                              </div>
-                              <div class="scpy-metabox-field__options">
-                                 <div class="scpy-metabox-field__input">
-                                       <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                                          name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
-                                          maxlength='<?php echo $field_data['maxlength']; ?>'
-                                       />
-                                    <span>Default: <code><?php echo $field_data['default']; ?></code></span>
-                                 </div>
-                                 <div class="scpy-metabox-field__desc">
-                                    <span> * <?php echo $field_data['desc']; ?></span>
-                                 </div>
-                              </div>
+                     foreach ( self::$fields_information as $field_name => $field_data ):
+                  ?> 
+                  <div class="scpy-metabox-field">
+                     <div class="scpy-metabox-field__label">
+                        <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
+                     </div>
+                     <div class="scpy-metabox-field__options">
+                        <div class="scpy-metabox-field__input">
+                              <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
+                                 name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
+                                 maxlength='<?php echo $field_data['maxlength']; ?>'
+                              />
+                           <span>Default: <code><?php echo $field_data['default']; ?></code></span>
                         </div>
-                     <?php
-                     }
-                  ?>
+                        <div class="scpy-metabox-field__desc">
+                           <span> * <?php echo $field_data['desc']; ?></span>
+                        </div>
+                     </div>
+                  </div>
+                  <?php endforeach; ?>
                </div>
                <div id="scpy-order" class="tabs-content__item">
-                  Hey!
+                  
+                  <?php
+                     foreach( self::$fields_order as $field_name => $field_data):
+                  ?>
+                  <div class="scpy-metabox-field">
+                     <div class="scpy-metabox-field__info">
+                        <div class="scpy-metabox-field__label">
+                           <label for='<?php echo $field_name; ?>'><h3><?php echo $field_data['label']; ?></h3></label>
+                        </div>
+                        <div class="scpy-metabox-field__info">
+                           <?php foreach( $field_data['info'] as $info_name => $info_desc ): ?>
+                              <div class="scpy-item">
+                                 <span class="scpy-item__name"><code><?php echo $info_name; ?></code>&nbsp;-&nbsp;<?php echo $info_desc; ?></span>
+                              </div>
+                           <?php endforeach; ?>
+                        </div>
+                     </div>
+                     <div class="scpy-metabox-field__options">
+                        <div class="scpy-metabox-field__input">
+                              <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
+                                 name='<?php echo $field_name; ?>' value=''
+                                 maxlength='<?php echo $field_data['maxlength']; ?>'
+                              />
+                           <span>Default: <code><?php echo $field_data['default']; ?></code></span>
+                        </div>
+                        <div class="scpy-metabox-field__desc">
+                           <span> * <?php echo $field_data['desc']; ?></span>
+                        </div>
+                     </div>
+                  </div>
+                  <? endforeach; ?>
                </div>  
             </div>
          </div>
@@ -352,13 +402,13 @@ class SimpleCopyright_CustomPost
     * @return array|null  field id's
     */
    public static function copyright_get_fields_name() {
-      return array_keys(self::$fields);
+      return array_keys(self::$fields_information);
    }
    /**
     * @return array|null  field data
     */
    public static function copyright_get_fields_data() {
-      return self::$fields;
+      return self::$fields_information;
    }
 }
 

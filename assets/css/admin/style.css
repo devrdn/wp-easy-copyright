@@ -110,6 +110,18 @@
   }
 }
 
+@media (min-width: 1200px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_item_order {
+    width: 600px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_item_order {
+    width: 900px;
+  }
+}
+
 #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options .scpy-metabox-field__desc {
   color: #808080;
   font-weight: 500;
@@ -135,6 +147,29 @@
 
 #simple-copy-metabox .scpy-metabox-field:not(:last-child) {
   margin-bottom: 17px;
+}
+
+/*
+ * Copyright `item-order` section CSS
+*/
+#scpy-order .scpy-metabox-field__label {
+  margin-bottom: 10px;
+}
+
+#scpy-order .scpy-metabox-field__info {
+  margin-bottom: 10px;
+}
+
+#scpy-order .scpy-metabox-field__info .scpy-item:not(:last-child) {
+  margin-bottom: 7px;
+}
+
+#scpy-order .scpy-metabox-field {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 0px !important;
 }
 
 /*

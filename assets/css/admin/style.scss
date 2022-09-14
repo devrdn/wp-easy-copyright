@@ -157,6 +157,17 @@ $screen-xxl-min: 1600px;
             @include xxl {
                width: 400px;
             }
+            
+         }
+
+         #_scpy_item_order {
+            @include xl {
+               width: 600px;
+            }
+
+            @include xxl {
+               width: 900px;
+            }
          }
 
          .scpy-metabox-field__desc {
@@ -182,8 +193,29 @@ $screen-xxl-min: 1600px;
       }
    }
 
+
    .scpy-metabox-field:not(:last-child) {
       margin-bottom: 17px;
+   }
+}
+
+/*
+ * Copyright `item-order` section CSS
+*/
+#scpy-order {
+   .scpy-metabox-field__label {
+      margin-bottom: 10px;
+   }
+   .scpy-metabox-field__info {
+      margin-bottom: 10px;
+
+      .scpy-item:not(:last-child) {
+         margin-bottom: 7px;
+      }
+   }
+   .scpy-metabox-field {
+      flex-direction: column;
+      margin-top: 0px !important;
    }
 }
 
