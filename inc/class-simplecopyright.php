@@ -63,8 +63,13 @@ class SimpleCopyright
       }
    }
 
+   /**
+    * Register simple copyright widget
+    *
+    * @since 1.0.0
+    */
    public static function register_widget() {
-      register_widget('simplecopyright_widget');
+      register_widget( 'simplecopyright_widget' );
    } 
 
    /**

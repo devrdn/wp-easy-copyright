@@ -87,13 +87,13 @@
 }
 
 @media (min-width: 1200px) {
-  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copy_name {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copyright_name {
     width: 200px;
   }
 }
 
 @media (min-width: 1600px) {
-  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copy_name {
+  #simple-copy-metabox .scpy-metabox-field .scpy-metabox-field__options #_scpy_copyright_name {
     width: 400px;
   }
 }

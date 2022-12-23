@@ -64,11 +64,9 @@ class SimpleCopyright_Shortcode
          return __( 'No such copright ID found', 'simple-copy' );
       }
 
-      $post_meta_data = SimpleCopyright_CustomPost::copyright_get_metabox_data( $post->ID );
-
+      $post_meta_data = SimpleCopyright_CustomPost::copyright_get_metabox_data( $post->ID, false );
 
       $html = apply_filters( 'copyright_render_shortcode_filter', $post_meta_data );
-
      
       return $html;
    }
@@ -82,38 +80,37 @@ class SimpleCopyright_Shortcode
     */
    public static function copyright_render_shortcode( $data = array() ) { 
 
-
+      // Field Order Name
+      $field_order_name = SimpleCopyright_CustomPost::copyright_get_field_order_name();
+      $field_order_info = SimpleCopyright_CustomPost::copyright_get_field_order_info();
+      $field_order = $data[ $field_order_name ] ? $data[ $field_order_name ] : $field_order_info['default'];
+      
+      // html layout of copyright
       $html  =  '<div class="simple-copyright">';
-      $html .= '<span class="scpy__symbol">{_scpy_symbol} </span>';
-      $html .= '<span class="scpy__startyear">{_scpy_start_year}&nbsp;</span>';
-      $html .= '<span class="scpy__endyear">{_scpy_end_year}&nbsp;</span>';
-      $html .= '<span class="scpy__name">{_scpy_copy_name}</span>';
-      $html .= '<span class="scpy__extra">.&nbsp;{_scpy_extra_text}</span>';
+      $html .= $field_order;
       $html .= '</div>';
 
       // replace copyright data
       $html  = preg_replace_callback(
-         '/\{(_scpy_[a-z_]+)\}/',
+         '/\[([a-z_]+)\]/',
 
          function( $matches ) use ( $data ) {
             $key =  $matches[1];
+            $field_name = '_scpy_' . $key;
 
-            if ( isset( $data[ $key ] ) ) {
-               if ( $key == '_scpy_start_year' ) {
-                  return $data[ $key ].'&nbsp;&mdash;';
-               }
-               return $data[ $key ];
+            if ( !empty( $data[ $field_name ] ) ) {
+               return $data[ $field_name ];
             }
 
             switch ( $key ) {
-               case '_scpy_symbol':
+               case 'symbol':
                   return '&copy;';
                   break;
-               case '_scpy_end_year':
+               case 'end_year':
                   return date_i18n( 'Y' );
                   break;
-               case '_scpy_extra_text':
-                  return 'All rights reserved.';
+               case 'extra_text':
+                  return 'All rights reserved';
                   break;
 
                return '';
@@ -122,6 +119,7 @@ class SimpleCopyright_Shortcode
          },
          $html
       );
+
       return $html; 
    }
 

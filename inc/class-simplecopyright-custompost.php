@@ -13,7 +13,7 @@ class SimpleCopyright_CustomPost
    /**
     * If the class has been initialized.
     *
-    * @var   bool
+    * @param   bool
     * @since 1.0.0
     */
    public static $is_initialized = false;
@@ -67,7 +67,7 @@ class SimpleCopyright_CustomPost
     */
    public static function init_settings() {
       self::$fields_information = [
-         '_scpy_copy_name' => [
+         '_scpy_copyright_name' => [
             'label'     => __('Copyright Name', 'simple-copy'),
             'type'      => 'text',
             'desc'      => __('Name of the enterprise / company, etc', 'simple-copy'),
@@ -115,14 +115,14 @@ class SimpleCopyright_CustomPost
             'type'      => 'text',
             'desc'      => __( 'Copyright information order', 'simple-copy' ),
             'maxlength' => 300,
-            'default'   => '[symbol] [start-year]-[end-year] [copyright-name]. [extra-text].',
+            'default'   => '[symbol] [start_year] [end_year] [copyright_name]. [extra_text].',
             'class'     => 'scpy__item_order',
             'info'      => [
-               'copyright-name'  => 'Name of the enterprise / company, etc',
-               'start-year'      => 'Copyright Start Year',
-               'end-year'        => 'Copyright End Year',
+               'copyright_name'  => 'Name of the enterprise / company, etc',
+               'start_year'      => 'Copyright Start Year',
+               'end_year'        => 'Copyright End Year',
                'symbol'          => 'Copyright Symbol',
-               'extra-text'      => 'Copyright extra text'
+               'extra_text'      => 'Copyright extra text'
             ]
          ]
       ];
@@ -211,7 +211,7 @@ class SimpleCopyright_CustomPost
    /**
     * Change 'Add Title' text on Copyright post type
     *
-    * @var   string $title
+    * @param   string $title
     * @since 1.0.0
     */
    public static function copyright_change_add_title( $title ) {
@@ -245,14 +245,14 @@ class SimpleCopyright_CustomPost
    /**
     * Copyright Metabox Callback
     *
-    * @var     array $post
+    * @param     array $post
     * @since   1.0.0
     */
    public static function copyright_metabox_callback( $post ) {
       
       $copyright_nonce_name = 'simple_copyright_nonce_'.$post->ID; // nonce name
       $scpy_info = self::copyright_get_metabox_data( $post->ID, false ); // get data from post meta
-      
+   
       wp_nonce_field( 'simple_copyright_metabox_save', $copyright_nonce_name );
       ?>
                  
@@ -308,8 +308,9 @@ class SimpleCopyright_CustomPost
                      <div class="scpy-metabox-field__options">
                         <div class="scpy-metabox-field__input">
                               <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                                 name='<?php echo $field_name; ?>' value=''
+                                 name='<?php echo $field_name; ?>' 
                                  maxlength='<?php echo $field_data['maxlength']; ?>'
+                                 value='<?php echo $scpy_info[ $field_name ] ?>'
                               />
                            <span>Default: <code><?php echo $field_data['default']; ?></code></span>
                         </div>
@@ -329,13 +330,15 @@ class SimpleCopyright_CustomPost
    /**
     * Get Copyright Metabox Data
     *
-    * @var     int   $post_id
-    * @var     bool  $unset_fields if true, unset empty values
+    * @param     int   $post_id
+    * @param     bool  $unset_fields if true, unset empty values
     * @since   1.0.0
     */
    public static function copyright_get_metabox_data ( $post_id, $unset_fields = true ) {
       
-      $fields = self::copyright_get_fields_name(); // get fields
+      $fields = self::copyright_get_fields_name(); // fields to get from db
+      $fields[] = self::copyright_get_field_order_name();
+
       $scpy_info = []; // init array
       
       foreach ( $fields as $field ) {
@@ -380,7 +383,10 @@ class SimpleCopyright_CustomPost
 
       // save metabox data
       $fields = self::copyright_get_fields_data();
-
+      $fields_order = self::copyright_get_field_order_info();
+      $fields_order_name = self::copyright_get_field_order_name();
+      
+      // save main fields
       foreach ( $fields as $id => $field ) {
          if ( empty( $_POST[ $id ] ) ) {
             delete_post_meta( $post_id, $id );
@@ -396,19 +402,49 @@ class SimpleCopyright_CustomPost
             }
          }
       }
+
+
+      // save extra fields (order)
+      if( empty( $_POST[ $fields_order_name ]  ) ) {
+         delete_post_meta( $post_id, $fields_order_name );
+      } 
+
+      // save fields order
+      if( strlen( $_POST[ $fields_order_name ] ) < $fields_order['maxlength'] ) {
+         update_post_meta( $post_id, $fields_order_name, $_POST[ $fields_order_name ] );
+      } else {
+         delete_post_meta( $post_id, $fields_order_name ); 
+      }
+
+      return $post_id;
    }
    
    /**
     * @return array|null  field id's
     */
    public static function copyright_get_fields_name() {
-      return array_keys(self::$fields_information);
+      return array_keys( self::$fields_information );
    }
+
    /**
     * @return array|null  field data
     */
    public static function copyright_get_fields_data() {
       return self::$fields_information;
+   }
+
+   /**
+    * @return array|null copyright order of fields information
+    */
+   public static function copyright_get_field_order_info() {
+      return self::$fields_order[ self::copyright_get_field_order_name() ];
+   }
+   
+   /**
+    * @return string order field name
+    */
+   public static function copyright_get_field_order_name() {
+      return array_key_first( self::$fields_order );
    }
 }
 
