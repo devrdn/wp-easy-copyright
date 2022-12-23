@@ -270,7 +270,7 @@ class SimpleCopyright_CustomPost
                   ?> 
                   <div class="scpy-metabox-field">
                      <div class="scpy-metabox-field__label">
-                        <label for='<?php echo $field_name; ?>'><?php echo $field_data['label']; ?></label>
+                        <label for='<?php echo $field_name; ?>'><?php _e($field_data['label'], 'simple-copy'); ?></label>
                      </div>
                      <div class="scpy-metabox-field__options">
                         <div class="scpy-metabox-field__input">
@@ -278,10 +278,10 @@ class SimpleCopyright_CustomPost
                                  name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
                                  maxlength='<?php echo $field_data['maxlength']; ?>'
                               />
-                           <span>Default: <code><?php echo $field_data['default']; ?></code></span>
+                           <span>Default: <code><?php _e($field_data['default'], 'simple-copy'); ?></code></span>
                         </div>
                         <div class="scpy-metabox-field__desc">
-                           <span> * <?php echo $field_data['desc']; ?></span>
+                           <span> * <?php _e($field_data['desc'], 'simple-copy'); ?></span>
                         </div>
                      </div>
                   </div>
@@ -295,12 +295,12 @@ class SimpleCopyright_CustomPost
                   <div class="scpy-metabox-field">
                      <div class="scpy-metabox-field__info">
                         <div class="scpy-metabox-field__label">
-                           <label for='<?php echo $field_name; ?>'><h3><?php echo $field_data['label']; ?></h3></label>
+                           <label for='<?php echo $field_name; ?>'><h3><?php _e($field_data['label'], 'simple-copy'); ?></h3></label>
                         </div>
                         <div class="scpy-metabox-field__info">
                            <?php foreach( $field_data['info'] as $info_name => $info_desc ): ?>
                               <div class="scpy-item">
-                                 <span class="scpy-item__name"><code>[<?php echo $info_name; ?>]</code>&nbsp;-&nbsp;<?php echo $info_desc; ?></span>
+                                 <span class="scpy-item__name"><code>[<?php _e($info_name, 'simple-copy'); ?>]</code>&nbsp;-&nbsp;<?php _e($info_desc, 'simple-copy'); ?></span>
                               </div>
                            <?php endforeach; ?>
                         </div>
@@ -312,10 +312,10 @@ class SimpleCopyright_CustomPost
                                  maxlength='<?php echo $field_data['maxlength']; ?>'
                                  value='<?php echo $scpy_info[ $field_name ] ?>'
                               />
-                           <span>Default: <code><?php echo $field_data['default']; ?></code></span>
+                           <span>Default: <code><?php _e($field_data['default'], 'simple-copy'); ?></code></span>
                         </div>
                         <div class="scpy-metabox-field__desc">
-                           <span> * <?php echo $field_data['desc']; ?></span>
+                           <span> * <?php _e($field_data['desc'], 'simple-copy'); ?></span>
                         </div>
                      </div>
                   </div>
