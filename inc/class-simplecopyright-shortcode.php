@@ -131,7 +131,7 @@ class SimpleCopyright_Shortcode
     */
    public static function copyright_show_shortcode( $post ) {
       if ( $post->post_type === SimpleCopyright::$post_type ) {
-         if ( $post->post_status == 'publish' ) {
+         if ( 'publish' === $post->post_status ) {
       ?>
          <div class='scpy-shortcode'>
             <input readonly onclick="this.select();" value="[simple-copyright id='<?echo $post->ID; ?>']">   
