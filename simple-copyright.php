@@ -52,7 +52,5 @@ require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright.php' );
 
 require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-widget.php' );
 
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-notices.php' );
-
 // Initialize the base class.
 new SimpleCopyright();
