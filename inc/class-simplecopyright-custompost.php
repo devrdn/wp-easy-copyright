@@ -300,7 +300,7 @@ class SimpleCopyright_CustomPost
                         <div class="scpy-metabox-field__info">
                            <?php foreach( $field_data['info'] as $info_name => $info_desc ): ?>
                               <div class="scpy-item">
-                                 <span class="scpy-item__name"><code><?php echo $info_name; ?></code>&nbsp;-&nbsp;<?php echo $info_desc; ?></span>
+                                 <span class="scpy-item__name"><code>[<?php echo $info_name; ?>]</code>&nbsp;-&nbsp;<?php echo $info_desc; ?></span>
                               </div>
                            <?php endforeach; ?>
                         </div>
