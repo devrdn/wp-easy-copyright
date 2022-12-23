@@ -81,14 +81,14 @@ class SimpleCopyright_Shortcode
    public static function copyright_render_shortcode( $data = array() ) { 
 
       // Field Order Name
-      $field_order_name = SimpleCopyright_CustomPost::copyright_get_field_order_name();
-      $field_order_info = SimpleCopyright_CustomPost::copyright_get_field_order_info();
-      $field_order = $data[ $field_order_name ] ? $data[ $field_order_name ] : $field_order_info['default'];
+      $field_order_name =  SimpleCopyright_CustomPost::copyright_get_field_order_name();
+      $field_order_info =  SimpleCopyright_CustomPost::copyright_get_field_order_info();
+      $field_order      =  $data[ $field_order_name ] ? $data[ $field_order_name ] : $field_order_info['default'];
       
       // html layout of copyright
-      $html  =  '<div class="simple-copyright">';
-      $html .= $field_order;
-      $html .= '</div>';
+      $html  =    '<div class="simple-copyright">';
+      $html .=    $field_order;
+      $html .=    '</div>';
 
       // replace copyright data
       $html  = preg_replace_callback(
