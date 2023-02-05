@@ -2,19 +2,19 @@
 // Die if this file is called directly.
 
 if ( ! defined( 'ABSPATH' ) ) {
-   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');
+   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'easy-copy');
    die();
 }
 
 
-if ( !class_exists( SimpleCopyright_Widget::class ) ) :
+if ( !class_exists( EasyCopyright_Widget::class ) ) :
 
 /**
- * Class for SimpleCopyright Widget
+ * Class for EasyCopyright Widget
  * 
  * @since   1.0.0
  */
-class SimpleCopyright_Widget extends WP_Widget {
+class EasyCopyright_Widget extends WP_Widget {
 
    /**
     * Widget constuctor
@@ -24,12 +24,12 @@ class SimpleCopyright_Widget extends WP_Widget {
     */
    public function __construct() {
       $widget_options = array(
-         'classname'    => 'scpy_widget',
+         'classname'    => 'easy_widget',
          'description'  => 'Shows Your Own Copyright',
       );
       parent::__construct( 
-         'simplecopyright_widget', 
-         esc_html__( 'SimpleCopyright Widget' , 'simple-copy' ), 
+         'easycopyright_widget', 
+         esc_html__( 'EasyCopyright Widget' , 'easy-copy' ), 
          $widget_options,
       );
    }
@@ -45,7 +45,7 @@ class SimpleCopyright_Widget extends WP_Widget {
 
       // echo copyright
       $id = $instance['id'];
-      echo do_shortcode( '[simple-copyright id="'.$id.'"]' );
+      echo do_shortcode( '[easy-copyright id="'.$id.'"]' );
 
       echo $args['after_widget'];
    }
@@ -58,9 +58,9 @@ class SimpleCopyright_Widget extends WP_Widget {
    public function form($instance) {
       $id = isset( $instance['id'] ) ? $instance['id'] : '';
       ?>
-         <div class="scpy-widget">
+         <div class="easy-widget">
             <label for="<?php echo $this->get_field_id('id'); ?>">Copyright ID: </label>
-            <input class="widefat scpy-widget__id" type="text" name="<?php echo $this->get_field_name('id'); ?>" id="<?php echo $this->get_field_id('id'); ?>" value="<?php echo esc_attr($id); ?>" />
+            <input class="widefat easy-widget__id" type="text" name="<?php echo $this->get_field_name('id'); ?>" id="<?php echo $this->get_field_id('id'); ?>" value="<?php echo esc_attr($id); ?>" />
          </div>
       <?php
    }

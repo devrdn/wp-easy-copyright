@@ -3,11 +3,11 @@
 // Die if this file is called directly.
 
 if ( ! defined( 'ABSPATH' ) ) {
-   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');
+   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'easy-copy');
    die();
 }
 
-if ( ! class_exists( SimpleCopyright::class ) ) :
+if ( ! class_exists( EasyCopyright::class ) ) :
 
 
 /**
@@ -18,7 +18,7 @@ if ( ! class_exists( SimpleCopyright::class ) ) :
    * 
    * @since 1.0.0
    */
-class SimpleCopyright
+class EasyCopyright
 {  
    /**
     * If the class has been initialized.
@@ -33,14 +33,14 @@ class SimpleCopyright
     * 
     * @since 1.0.0
     */
-   public static $post_type = 'simplecopy';
+   public static $post_type = 'easycopy';
 
    /**
     * The slug of the plugin.
     *
     * @since 1.0.0
     */
-   public static $plugin_slug = 'simplecopy';
+   public static $plugin_slug = 'easycopy';
 
    /**
     * The version of the plugin.
@@ -58,18 +58,18 @@ class SimpleCopyright
    public function __construct() {
       if ( ! self::$is_initialized ) {
          self::init_hooks();
-         new SimpleCopyright_CustomPost();
-         new SimpleCopyright_Shortcode();
+         new EasyCopyright_CustomPost();
+         new EasyCopyright_Shortcode();
       }
    }
 
    /**
-    * Register simple copyright widget
+    * Register easy copyright widget
     *
     * @since 1.0.0
     */
    public static function register_widget() {
-      register_widget( 'simplecopyright_widget' );
+      register_widget( 'easycopyright_widget' );
    } 
 
    /**
@@ -81,11 +81,11 @@ class SimpleCopyright
       self::$is_initialized = true;
 
       // hooks for admin/front styles and scripts
-      add_action( 'admin_enqueue_scripts', [ __CLASS__ , 'sc_enqueue_admin' ] );
-      add_action( 'wp_enqueue_scripts', [ __CLASS__ , 'sc_enqueue_front' ] );
+      add_action( 'admin_enqueue_scripts', [ __CLASS__ , 'ec_enqueue_admin' ] );
+      add_action( 'wp_enqueue_scripts', [ __CLASS__ , 'ec_enqueue_front' ] );
 
       // hooks for loading text domain
-      add_action( 'plugins_loaded', [ __CLASS__ , 'sc_load_text_domain' ] );
+      add_action( 'plugins_loaded', [ __CLASS__ , 'ec_load_text_domain' ] );
 
       add_action ( 'widgets_init', [ __CLASS__, 'register_widget'] );
    }
@@ -96,8 +96,8 @@ class SimpleCopyright
     *
     * @since 1.0.0
     */
-   public static function sc_load_text_domain() {
-      load_plugin_textdomain( 'simple-copy', false, SIMPLECOPYRIGHT__LANGUAGE_DIR );
+   public static function ec_load_text_domain() {
+      load_plugin_textdomain( 'easy-copy', false, EASYCOPYRIGHT__LANGUAGE_DIR );
    }
 
    /**
@@ -105,10 +105,10 @@ class SimpleCopyright
     *
     * @since 1.0.0
     */
-   public static function sc_enqueue_admin()
+   public static function ec_enqueue_admin()
    {
-      wp_enqueue_style( 'sc-admin-style',  SIMPLECOPYRIGHT__ASSETS_DIR.'/css/admin/style.css' );
-      wp_enqueue_script( 'sc-admin-script', SIMPLECOPYRIGHT__ASSETS_DIR.'/js/admin/scpy-tabs.js', array(), 1.0, 'in_footer' );
+      wp_enqueue_style( 'ec-admin-style',  EASYCOPYRIGHT__ASSETS_DIR.'/css/admin/style.css' );
+      wp_enqueue_script( 'ec-admin-script', EASYCOPYRIGHT__ASSETS_DIR.'/js/admin/scpy-tabs.js', array(), 1.0, 'in_footer' );
    }
 
    /**
@@ -116,10 +116,10 @@ class SimpleCopyright
     *
     * @since 1.0.0
     */
-   public static function sc_enqueue_front()
+   public static function ec_enqueue_front()
    {
-      wp_enqueue_style( 'sc-front-style',  SIMPLECOPYRIGHT__ASSETS_DIR.'assets/css/front/style.css' );
-      wp_enqueue_script( 'sc-front-script', SIMPLECOPYRIGHT__ASSETS_DIR.'assets/js/front/script.js', array( 'jquery' ), 1.0, true);
+      wp_enqueue_style( 'ec-front-style',  EASYCOPYRIGHT__ASSETS_DIR.'assets/css/front/style.css' );
+      wp_enqueue_script( 'ec-front-script', EASYCOPYRIGHT__ASSETS_DIR.'assets/js/front/script.js', array( 'jquery' ), 1.0, true);
    }
 
 }

@@ -2,11 +2,11 @@
 
 // Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
-   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');
+   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'easy-copy');
    die();
 }
 
-if ( ! class_exists( SimpleCopyright_Shortcode::class ) ) :
+if ( ! class_exists( EasyCopyright_Shortcode::class ) ) :
 
 /**
  * Copyright Shortcode Class
@@ -15,7 +15,7 @@ if ( ! class_exists( SimpleCopyright_Shortcode::class ) ) :
  * 
  * @since 1.0.0
  */
-class SimpleCopyright_Shortcode
+class EasyCopyright_Shortcode
 {
 
    /**
@@ -35,7 +35,7 @@ class SimpleCopyright_Shortcode
     * @since 1.0.0
     */
    public static function copyright_register_shortcode() {
-      add_shortcode( 'simple-copyright', [ __CLASS__, 'copyright_shortcode' ] );
+      add_shortcode( 'easy-copyright', [ __CLASS__, 'copyright_shortcode' ] );
    }
 
    /**
@@ -55,16 +55,16 @@ class SimpleCopyright_Shortcode
       $atts = shortcode_atts(
          $default_atts,
          $raw_atts,
-         'simple-copyright'
+         'easy-copyright'
       );
 
       $post_id = $atts['id'];
       $post  = trim( $post_id ) == '' ? null : get_post( $post_id );
-      if ( $post == null || $post->post_type != SimpleCopyright::$post_type || $post->post_status != 'publish' ) {
-         return __( 'No such copright ID found', 'simple-copy' );
+      if ( $post == null || $post->post_type != EasyCopyright::$post_type || $post->post_status != 'publish' ) {
+         return __( 'No such copright ID found', 'easy-copy' );
       }
 
-      $post_meta_data = SimpleCopyright_CustomPost::copyright_get_metabox_data( $post->ID, false );
+      $post_meta_data = EasyCopyright_CustomPost::copyright_get_metabox_data( $post->ID, false );
 
       $html = apply_filters( 'copyright_render_shortcode_filter', $post_meta_data );
      
@@ -81,12 +81,12 @@ class SimpleCopyright_Shortcode
    public static function copyright_render_shortcode( $data = array() ) { 
 
       // Field Order Name
-      $field_order_name =  SimpleCopyright_CustomPost::copyright_get_field_order_name();
-      $field_order_info =  SimpleCopyright_CustomPost::copyright_get_field_order_info();
+      $field_order_name =  EasyCopyright_CustomPost::copyright_get_field_order_name();
+      $field_order_info =  EasyCopyright_CustomPost::copyright_get_field_order_info();
       $field_order      =  $data[ $field_order_name ] ? $data[ $field_order_name ] : $field_order_info['default'];
       
       // html layout of copyright
-      $html  =    '<div class="simple-copyright">';
+      $html  =    '<div class="easy-copyright">';
       $html .=    $field_order;
       $html .=    '</div>';
 
@@ -96,7 +96,7 @@ class SimpleCopyright_Shortcode
 
          function( $matches ) use ( $data ) {
             $key =  $matches[1];
-            $field_name = '_scpy_' . $key;
+            $field_name = '_easy_' . $key;
 
             if ( !empty( $data[ $field_name ] ) ) {
                return $data[ $field_name ];
@@ -130,12 +130,12 @@ class SimpleCopyright_Shortcode
     * @since 1.0.0
     */
    public static function copyright_show_shortcode( $post ) {
-      if ( $post->post_type === SimpleCopyright::$post_type ) {
+      if ( $post->post_type === EasyCopyright::$post_type ) {
          if ( 'publish' === $post->post_status ) {
       ?>
-         <div class='scpy-shortcode'>
-            <input readonly onclick="this.select();" value="[simple-copyright id='<?echo $post->ID; ?>']">   
-            <input class="scpy-shortcode__showblock" readonly onclick="this.select();" value="do_shortcode( '[simple-copyright id='<?echo $post->ID; ?>']' );">   
+         <div class='easy-shortcode'>
+            <input readonly onclick="this.select();" value="[easy-copyright id='<?echo $post->ID; ?>']">   
+            <input class="easy-shortcode__showblock" readonly onclick="this.select();" value="do_shortcode( '[easy-copyright id='<?echo $post->ID; ?>']' );">   
          </div>
       <?php
          }

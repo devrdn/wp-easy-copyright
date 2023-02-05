@@ -11,7 +11,7 @@ if( !defined ( 'WP_UNINSTALL_PLUGIN' ) ) {
  * 
  * @since 1.0.0
  */
-class SimpleCopyright_Uninstall {
+class EasyCopyright_Uninstall {
 
    /**
     * All WordPress Post Status
@@ -47,7 +47,7 @@ class SimpleCopyright_Uninstall {
     */
    public static function delete_copyright_post_meta() {
       $copyrights_meta_to_delete = array(
-         'post_type' => 'simplecopy',
+         'post_type' => 'easycopy',
          'post_status' => self::$post_status,
          'numberposts' => -1,
       );
@@ -55,7 +55,7 @@ class SimpleCopyright_Uninstall {
       $copyrights_meta = get_posts( $copyrights_meta_to_delete );
 
       foreach( $copyrights_meta as $copyright ) {
-         delete_post_meta( $copyright->ID, '_sc_copyright_text' );
+         delete_post_meta( $copyright->ID, '_ec_copyright_text' );
       } 
    }
 
@@ -68,7 +68,7 @@ class SimpleCopyright_Uninstall {
 
 
       $copyrights_to_delete = array (
-         'post_type'    => 'simplecopy',
+         'post_type'    => 'easycopy',
          'post_status'  => self::$post_status,
          'numberposts'  => -1,
       );
@@ -82,4 +82,4 @@ class SimpleCopyright_Uninstall {
 
 } 
 
-SimpleCopyright_Uninstall::uninstall(); // Run uninstallation
+EasyCopyright_Uninstall::uninstall(); // Run uninstallation

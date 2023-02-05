@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Simple Copyright
+ * Plugin Name: Easy Copyright
  * Description: A plugin to manage copyright information
  * Version: 1.0.0
  * Author: rdndev
@@ -22,35 +22,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * 
- * Copyright 2022 rdndev.
+ * Copyright 2023rdndev.
  * 
  * 
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Copyright: rdndev
- * Text Domain: simple-copy
+ * Text Domain: easy-copy
  * Domain Path: /lang
  */
 
 
 // Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
-   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'simple-copy');
+   _e( 'Hello, i\'m just plugin, and i\'m called when wordpress call me!', 'easy-copy');
    die();
 }
 
 // Constants
-define( 'SIMPLECOPYRIGHT__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'SIMPLECOPYRIGHT__ASSETS_DIR', plugins_url( 'assets', __FILE__) );
-define( 'SIMPLECOPYRIGHT__LANGUAGE_DIR', dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+define( 'EASYCOPYRIGHT__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EASYCOPYRIGHT__ASSETS_DIR', plugins_url( 'assets', __FILE__) );
+define( 'EASYCOPYRIGHT__LANGUAGE_DIR', dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 // Require includes files for the plugin.
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-custompost.php' );
+require_once( EASYCOPYRIGHT__PLUGIN_DIR . 'inc/class-easycopyright-custompost.php' );
 
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-shortcode.php' );
+require_once( EASYCOPYRIGHT__PLUGIN_DIR . 'inc/class-easycopyright-shortcode.php' );
 
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright.php' );
+require_once( EASYCOPYRIGHT__PLUGIN_DIR . 'inc/class-easycopyright.php' );
 
-require_once( SIMPLECOPYRIGHT__PLUGIN_DIR . 'inc/class-simplecopyright-widget.php' );
+require_once( EASYCOPYRIGHT__PLUGIN_DIR . 'inc/class-easycopyright-widget.php' );
 
 // Initialize the base class.
-new SimpleCopyright();
+new EasyCopyright();

@@ -1,0 +1,138 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: EasyCopyright\n"
+"POT-Creation-Date: 2023-02-05 21:09+0200\n"
+"PO-Revision-Date: 2023-02-05 21:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: esc_html__;__;_e;_x\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: easy-copyright.php:37 inc/class-easycopyright-custompost.php:4
+#: inc/class-easycopyright-shortcode.php:5 inc/class-easycopyright-widget.php:5
+#: inc/class-easycopyright.php:6
+msgid "Hello, i'm just plugin, and i'm called when wordpress call me!"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:71
+msgid "Copyright Name"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:73
+msgid "Name of the enterprise / company, etc"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:79
+msgid "Start Year"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:81
+msgid "Copyright Start Year"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:87
+msgid "End Year"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:89
+msgid "Copyright End Year"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:95
+msgid "Symbol"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:97
+msgid "Copyright Symbol"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:103
+msgid "Extra Text"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:105
+msgid "Copyright extra text (e.g. all rights reserved)"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:114
+msgid "Item Order"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:116
+msgid "Copyright information order"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:140
+#: inc/class-easycopyright-custompost.php:141
+#: inc/class-easycopyright-custompost.php:142
+msgid "Easy Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:143
+msgid "All Copyrights"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:144
+#: inc/class-easycopyright-custompost.php:145
+msgid "Add Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:146
+msgid "Edit Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:147
+msgid "New Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:148
+msgid "View Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:149
+msgid "Search Copyright"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:150
+msgid "No Copyrights found"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:151
+msgid "No Copyrights found in Trash"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:176
+msgid "Shortcode"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:177
+msgid "Last Modified"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:198
+msgid "Save copyright in order to see shortcode"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:221
+msgid "Add Copyright Title"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:237
+msgid "Copyright Options"
+msgstr ""
+
+#: inc/class-easycopyright-shortcode.php:64
+msgid "No such copright ID found"
+msgstr ""
+
+#: inc/class-easycopyright-widget.php:32
+msgid "EasyCopyright Widget"
+msgstr ""

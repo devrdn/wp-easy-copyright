@@ -1,13 +1,13 @@
 <?php
 // Die if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
-   _e("Hello, i'm just plugin, and i'm called when wordpress call me!", 'simple-copy');
+   _e("Hello, i'm just plugin, and i'm called when wordpress call me!", 'easy-copy');
    die();
 }
 
-if ( !class_exists( SimpleCopyright_CustomPost::class ) ) :
+if ( !class_exists( EasyCopyright_CustomPost::class ) ) :
 
-class SimpleCopyright_CustomPost
+class EasyCopyright_CustomPost
 {
 
    /**
@@ -58,8 +58,8 @@ class SimpleCopyright_CustomPost
       add_action( 'save_post', [ __CLASS__, 'copyright_metabox_save' ], 10, 2 );
       
       // custom column hooks
-      add_filter( 'manage_simplecopy_posts_columns', [ __CLASS__, 'copyright_filter_post_columns' ] );
-      add_action( 'manage_simplecopy_posts_custom_column', [ __CLASS__, 'copyright_post_columns_data' ], 10, 2 );
+      add_filter( 'manage_easycopy_posts_columns', [ __CLASS__, 'copyright_filter_post_columns' ] );
+      add_action( 'manage_easycopy_posts_custom_column', [ __CLASS__, 'copyright_post_columns_data' ], 10, 2 );
    }
 
    /**
@@ -67,56 +67,56 @@ class SimpleCopyright_CustomPost
     */
    public static function init_settings() {
       self::$fields_information = [
-         '_scpy_copyright_name' => [
-            'label'     => __('Copyright Name', 'simple-copy'),
+         '_easy_copyright_name' => [
+            'label'     => __('Copyright Name', 'easy-copy'),
             'type'      => 'text',
-            'desc'      => __('Name of the enterprise / company, etc', 'simple-copy'),
+            'desc'      => __('Name of the enterprise / company, etc', 'easy-copy'),
             'maxlength' => 100,
             'default'   => 'none',
-            'class'     => 'scpy__copy_name'
+            'class'     => 'easy__copy_name'
          ],
-         '_scpy_start_year' => [
-            'label'     => __('Start Year', 'simple-copy'),
+         '_easy_start_year' => [
+            'label'     => __('Start Year', 'easy-copy'),
             'type'      => 'number',
-            'desc'      => __( 'Copyright Start Year', 'simple-copy' ),
+            'desc'      => __( 'Copyright Start Year', 'easy-copy' ),
             'maxlength' => 4,
             'default'   => 'none',
-            'class'     => 'scpy__copy_name'
+            'class'     => 'easy__copy_name'
          ], 
-         '_scpy_end_year' => [
-            'label'      => __( 'End Year', 'simple-copy' ),
+         '_easy_end_year' => [
+            'label'      => __( 'End Year', 'easy-copy' ),
             'type'       => 'number',
-            'desc'       => __( 'Copyright End Year', 'simple-copy' ),
+            'desc'       => __( 'Copyright End Year', 'easy-copy' ),
             'maxlength'  => 4,
             'default'    => 'Current Year',
-            'class'      => 'scpy__end_year'
+            'class'      => 'easy__end_year'
          ],
-         '_scpy_symbol' => [
-            'label'     => __( 'Symbol', 'simple-copy' ),
+         '_easy_symbol' => [
+            'label'     => __( 'Symbol', 'easy-copy' ),
             'type'      => 'text',
-            'desc'      => __( 'Copyright Symbol', 'simple-copy' ),
+            'desc'      => __( 'Copyright Symbol', 'easy-copy' ),
             'maxlength' => 3,
             'default'   => '&copy;',
-            'class'     => 'scpy__symbol'
+            'class'     => 'easy__symbol'
          ],
-         '_scpy_extra_text' => [
-            'label'     => __( 'Extra Text', 'simple-copy' ),
+         '_easy_extra_text' => [
+            'label'     => __( 'Extra Text', 'easy-copy' ),
             'type'      => 'text',
-            'desc'      => __( 'Copyright extra text (e.g. all rights reserved)', 'simple-copy' ),
+            'desc'      => __( 'Copyright extra text (e.g. all rights reserved)', 'easy-copy' ),
             'maxlength' => 100,
             'default'   => 'All Rights Reserved',
-            'class'     => 'scpy__extra_text'
+            'class'     => 'easy__extra_text'
          ]
       ];
 
       self::$fields_order = [
-         '_scpy_item_order' => [
-            'label'     => __( 'Item Order', 'simple-copy' ),
+         '_easy_item_order' => [
+            'label'     => __( 'Item Order', 'easy-copy' ),
             'type'      => 'text',
-            'desc'      => __( 'Copyright information order', 'simple-copy' ),
+            'desc'      => __( 'Copyright information order', 'easy-copy' ),
             'maxlength' => 300,
             'default'   => '[symbol] [start_year] [end_year] [copyright_name]. [extra_text].',
-            'class'     => 'scpy__item_order',
+            'class'     => 'easy__item_order',
             'info'      => [
                'copyright_name'  => 'Name of the enterprise / company, etc',
                'start_year'      => 'Copyright Start Year',
@@ -137,18 +137,18 @@ class SimpleCopyright_CustomPost
    {
 
       $labels = array(
-         'name'               => _x( 'Simple Copyright', 'simple-copy' ),
-         'singular_name'      => _x( 'Simple Copyright', 'simple-copy' ),
-         'menu_name'          => __( 'Simple Copyright', 'simple-copy' ),
-         'all_items'          => __( 'All Copyrights', 'simple-copy' ),
-         'add_new'            => __( 'Add Copyright', 'simple-copy' ),
-         'add_new_item'       => __( 'Add Copyright', 'simple-copy' ),
-         'edit_item'          => __( 'Edit Copyright', 'simple-copy' ),
-         'new_item'           => __( 'New Copyright', 'simple-copy' ),
-         'view_item'          => __( 'View Copyright', 'simple-copy' ),
-         'search_items'       => __( 'Search Copyright', 'simple-copy' ),
-         'not_found'          => __( 'No Copyrights found', 'simple-copy' ),
-         'not_found_in_trash' => __( 'No Copyrights found in Trash', 'simple-copy' )
+         'name'               => _x( 'Easy Copyright', 'easy-copy' ),
+         'singular_name'      => _x( 'Easy Copyright', 'easy-copy' ),
+         'menu_name'          => __( 'Easy Copyright', 'easy-copy' ),
+         'all_items'          => __( 'All Copyrights', 'easy-copy' ),
+         'add_new'            => __( 'Add Copyright', 'easy-copy' ),
+         'add_new_item'       => __( 'Add Copyright', 'easy-copy' ),
+         'edit_item'          => __( 'Edit Copyright', 'easy-copy' ),
+         'new_item'           => __( 'New Copyright', 'easy-copy' ),
+         'view_item'          => __( 'View Copyright', 'easy-copy' ),
+         'search_items'       => __( 'Search Copyright', 'easy-copy' ),
+         'not_found'          => __( 'No Copyrights found', 'easy-copy' ),
+         'not_found_in_trash' => __( 'No Copyrights found in Trash', 'easy-copy' )
       ); 
 
       $args = array(
@@ -156,30 +156,30 @@ class SimpleCopyright_CustomPost
          'publicly_queryable'  => false,
          'exclude_from_search' => false,
          'show_in_nav_menus'   => false,
-         'rewrite'             => [ 'slug' => SimpleCopyright::$plugin_slug ],
+         'rewrite'             => [ 'slug' => EasyCopyright::$plugin_slug ],
          'has_archive'         => false,
          'labels'              => $labels,
          'supports'            => [ 'title' ],
          'menu_icon'           => 'dashicons-admin-site',
       );
 
-      register_post_type( SimpleCopyright::$post_type , $args );
+      register_post_type( EasyCopyright::$post_type , $args );
    }
 
    /**
-    * Customize the post columns for simple-copyright post type
+    * Customize the post columns for easy-copyright post type
     *
     * @return array $columns
     * @since 1.0.0
     */
    public static function copyright_filter_post_columns( $columns ) {
-      $columns['shortcode'] = __( 'Shortcode', 'simple-copy' );
-      $columns['modified']  = __('Last Modified', 'simple-copy');
+      $columns['shortcode'] = __( 'Shortcode', 'easy-copy' );
+      $columns['modified']  = __('Last Modified', 'easy-copy');
       return $columns;
    }
 
    /**
-    * Add data to the custom columns to the simple-copyright post type
+    * Add data to the custom columns to the easy-copyright post type
     * 
     * @param string  $column  Name of the colums
     * @param int     $post_id Current post ID
@@ -193,9 +193,9 @@ class SimpleCopyright_CustomPost
          
          case 'shortcode':
             if ( 'publish' == $post->post_status ) {
-               echo '<code>[simple-copyright id="'.$post_id.'"]</code>';
+               echo '<code>[easy-copyright id="'.$post_id.'"]</code>';
             } else {
-               _e( 'Save copyright in order to see shortcode', 'simple-copy' );
+               _e( 'Save copyright in order to see shortcode', 'easy-copy' );
             }
             break;
 
@@ -217,8 +217,8 @@ class SimpleCopyright_CustomPost
    public static function copyright_change_add_title( $title ) {
       $screen = get_current_screen();
 
-      if (  $screen->post_type == SimpleCopyright::$post_type ) {
-         $title = esc_html__( 'Add Copyright Title' , 'simple-copy' );
+      if (  $screen->post_type == EasyCopyright::$post_type ) {
+         $title = esc_html__( 'Add Copyright Title' , 'easy-copy' );
       }
 
       return $title;
@@ -233,10 +233,10 @@ class SimpleCopyright_CustomPost
 
       // metabox for copyright post type
       add_meta_box(
-         'simple-copy-metabox',
-         __( 'Copyright Options', 'simple-copy' ),
+         'easy-copy-metabox',
+         __( 'Copyright Options', 'easy-copy' ),
          [ __CLASS__ , 'copyright_metabox_callback' ],
-         SimpleCopyright::$post_type,
+         EasyCopyright::$post_type,
          'normal',
          'default'
       );
@@ -245,77 +245,77 @@ class SimpleCopyright_CustomPost
    /**
     * Copyright Metabox Callback
     *
-    * @param     array $post
+    * @param   Object $post
     * @since   1.0.0
     */
    public static function copyright_metabox_callback( $post ) {
       
-      $copyright_nonce_name = 'simple_copyright_nonce_'.$post->ID; // nonce name
-      $scpy_info = self::copyright_get_metabox_data( $post->ID, false ); // get data from post meta
+      $copyright_nonce_name = 'easy_copyright_nonce_'.$post->ID; // nonce name
+      $easy_info = self::copyright_get_metabox_data( $post->ID, false ); // get data from post meta
    
-      wp_nonce_field( 'simple_copyright_metabox_save', $copyright_nonce_name );
+      wp_nonce_field( 'easy_copyright_metabox_save', $copyright_nonce_name );
       ?>
                  
 
-      <div class="scpy-metabox-wrap"> 
+      <div class="easy-metabox-wrap"> 
          <div class="tabs">
             <div class="tabs-trigger">
-               <a href="#scpy-form" class="tabs-trigger__item active-trigger">Information</a>
-               <a href="#scpy-order" class="tabs-trigger__item">Items Order</a>
+               <a href="#easy-form" class="tabs-trigger__item active-trigger">Information</a>
+               <a href="#easy-order" class="tabs-trigger__item">Items Order</a>
             </div>
             <div class="tabs-content">
-               <div id="scpy-form" class="tabs-content__item active-tab">
+               <div id="easy-form" class="tabs-content__item active-tab">
                   <?php
                      foreach ( self::$fields_information as $field_name => $field_data ):
                   ?> 
-                  <div class="scpy-metabox-field">
-                     <div class="scpy-metabox-field__label">
-                        <label for='<?php echo $field_name; ?>'><?php _e($field_data['label'], 'simple-copy'); ?></label>
+                  <div class="easy-metabox-field">
+                     <div class="easy-metabox-field__label">
+                        <label for='<?php echo $field_name; ?>'><?php _e($field_data['label'], 'easy-copy'); ?></label>
                      </div>
-                     <div class="scpy-metabox-field__options">
-                        <div class="scpy-metabox-field__input">
+                     <div class="easy-metabox-field__options">
+                        <div class="easy-metabox-field__input">
                               <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                                 name='<?php echo $field_name; ?>' value='<?php echo $scpy_info[ $field_name ]?>'
+                                 name='<?php echo $field_name; ?>' value='<?php echo $easy_info[ $field_name ]?>'
                                  maxlength='<?php echo $field_data['maxlength']; ?>'
                               />
-                           <span>Default: <code><?php _e($field_data['default'], 'simple-copy'); ?></code></span>
+                           <span>Default: <code><?php _e($field_data['default'], 'easy-copy'); ?></code></span>
                         </div>
-                        <div class="scpy-metabox-field__desc">
-                           <span> * <?php _e($field_data['desc'], 'simple-copy'); ?></span>
+                        <div class="easy-metabox-field__desc">
+                           <span> * <?php _e($field_data['desc'], 'easy-copy'); ?></span>
                         </div>
                      </div>
                   </div>
                   <?php endforeach; ?>
                </div>
-               <div id="scpy-order" class="tabs-content__item">
+               <div id="easy-order" class="tabs-content__item">
                   
                   <?php
                      foreach( self::$fields_order as $field_name => $field_data):
                   ?>
-                  <div class="scpy-metabox-field">
-                     <div class="scpy-metabox-field__info">
-                        <div class="scpy-metabox-field__label">
-                           <label for='<?php echo $field_name; ?>'><h3><?php _e($field_data['label'], 'simple-copy'); ?></h3></label>
+                  <div class="easy-metabox-field">
+                     <div class="easy-metabox-field__info">
+                        <div class="easy-metabox-field__label">
+                           <label for='<?php echo $field_name; ?>'><h3><?php _e($field_data['label'], 'easy-copy'); ?></h3></label>
                         </div>
-                        <div class="scpy-metabox-field__info">
+                        <div class="easy-metabox-field__info">
                            <?php foreach( $field_data['info'] as $info_name => $info_desc ): ?>
-                              <div class="scpy-item">
-                                 <span class="scpy-item__name"><code>[<?php _e($info_name, 'simple-copy'); ?>]</code>&nbsp;-&nbsp;<?php _e($info_desc, 'simple-copy'); ?></span>
+                              <div class="easy-item">
+                                 <span class="easy-item__name"><code>[<?php _e($info_name, 'easy-copy'); ?>]</code>&nbsp;-&nbsp;<?php _e($info_desc, 'easy-copy'); ?></span>
                               </div>
                            <?php endforeach; ?>
                         </div>
                      </div>
-                     <div class="scpy-metabox-field__options">
-                        <div class="scpy-metabox-field__input">
+                     <div class="easy-metabox-field__options">
+                        <div class="easy-metabox-field__input">
                               <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
                                  name='<?php echo $field_name; ?>' 
                                  maxlength='<?php echo $field_data['maxlength']; ?>'
-                                 value='<?php echo $scpy_info[ $field_name ] ?>'
+                                 value='<?php echo $easy_info[ $field_name ] ?>'
                               />
-                           <span>Default: <code><?php _e($field_data['default'], 'simple-copy'); ?></code></span>
+                           <span>Default: <code><?php _e($field_data['default'], 'easy-copy'); ?></code></span>
                         </div>
-                        <div class="scpy-metabox-field__desc">
-                           <span> * <?php _e($field_data['desc'], 'simple-copy'); ?></span>
+                        <div class="easy-metabox-field__desc">
+                           <span> * <?php _e($field_data['desc'], 'easy-copy'); ?></span>
                         </div>
                      </div>
                   </div>
@@ -339,16 +339,16 @@ class SimpleCopyright_CustomPost
       $fields = self::copyright_get_fields_name(); // fields to get from db
       $fields[] = self::copyright_get_field_order_name();
 
-      $scpy_info = []; // init array
+      $easy_info = []; // init array
       
       foreach ( $fields as $field ) {
-         $scpy_info[ $field ] = get_post_meta( $post_id, $field, true );
-         if ( $unset_fields && empty( $scpy_info[ $field ] ) ) {
-            unset( $scpy_info[ $field ] );
+         $easy_info[ $field ] = get_post_meta( $post_id, $field, true );
+         if ( $unset_fields && empty( $easy_info[ $field ] ) ) {
+            unset( $easy_info[ $field ] );
          }
       }
           
-      return $scpy_info;
+      return $easy_info;
    }
 
   /**
@@ -359,8 +359,8 @@ class SimpleCopyright_CustomPost
   public static function copyright_metabox_save( $post_id, $post ) {
 
       //check nonce fields
-      $copyright_nonce_name = 'simple_copyright_nonce_'.$post_id;
-      if ( !isset( $_POST[ $copyright_nonce_name ] ) || !wp_verify_nonce( $_POST[ $copyright_nonce_name ], 'simple_copyright_metabox_save'  ) ) {
+      $copyright_nonce_name = 'easy_copyright_nonce_'.$post_id;
+      if ( !isset( $_POST[ $copyright_nonce_name ] ) || !wp_verify_nonce( $_POST[ $copyright_nonce_name ], 'easy_copyright_metabox_save'  ) ) {
          return $post_id;
       }
 
@@ -369,8 +369,8 @@ class SimpleCopyright_CustomPost
          return $post_id;
       }
 
-      // check if post is of type 'simplecopy'      
-      if ( $post->post_type != SimpleCopyright::$post_type ) {
+      // check if post is of type 'easycopy'      
+      if ( $post->post_type != EasyCopyright::$post_type ) {
          return $post_id;
       }
 

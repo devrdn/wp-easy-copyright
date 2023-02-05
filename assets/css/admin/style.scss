@@ -103,7 +103,7 @@ $screen-xxl-min: 1600px;
 /*
  * Metabox CSS
 */
-#simple-copy-metabox {
+#easy-copy-metabox {
    border: 1px solid $primary-color;
 
    .postbox-header {
@@ -123,7 +123,7 @@ $screen-xxl-min: 1600px;
       margin-top: 0;
       padding: 0;
    }
-   .scpy-metabox-field {
+   .easy-metabox-field {
       padding-left: 5px;
       display: flex;
       align-items: flex-start;
@@ -132,14 +132,14 @@ $screen-xxl-min: 1600px;
          margin-top: 15px;
       }
 
-      .scpy-metabox-field__label {
+      .easy-metabox-field__label {
          width: 150px;
          font-weight: 600;
          font-size: 14px;
       }
 
-      .scpy-metabox-field__options {
-         #_scpy_copyright_name {
+      .easy-metabox-field__options {
+         #_easy_copyright_name {
             @include xl {
                width: 200px;
             }
@@ -149,7 +149,7 @@ $screen-xxl-min: 1600px;
             }
          }
 
-         #_scpy_extra_text {
+         #_easy_extra_text {
             @include xl {
                width: 200px;
             }
@@ -160,7 +160,7 @@ $screen-xxl-min: 1600px;
             
          }
 
-         #_scpy_item_order {
+         #_easy_item_order {
             @include xl {
                width: 600px;
             }
@@ -170,7 +170,7 @@ $screen-xxl-min: 1600px;
             }
          }
 
-         .scpy-metabox-field__desc {
+         .easy-metabox-field__desc {
             color: $desc-text-color;
             font-weight: 500;
             text-decoration: wavy;
@@ -194,7 +194,7 @@ $screen-xxl-min: 1600px;
    }
 
 
-   .scpy-metabox-field:not(:last-child) {
+   .easy-metabox-field:not(:last-child) {
       margin-bottom: 17px;
    }
 }
@@ -202,18 +202,18 @@ $screen-xxl-min: 1600px;
 /*
  * Copyright `item-order` section CSS
 */
-#scpy-order {
-   .scpy-metabox-field__label {
+#easy-order {
+   .easy-metabox-field__label {
       margin-bottom: 10px;
    }
-   .scpy-metabox-field__info {
+   .easy-metabox-field__info {
       margin-bottom: 10px;
 
-      .scpy-item:not(:last-child) {
+      .easy-item:not(:last-child) {
          margin-bottom: 7px;
       }
    }
-   .scpy-metabox-field {
+   .easy-metabox-field {
       flex-direction: column;
       margin-top: 0px !important;
    }
@@ -223,7 +223,7 @@ $screen-xxl-min: 1600px;
  * ShortCode CSS
 */
 
-.scpy-shortcode {
+.easy-shortcode {
    margin-top: 10px;
    padding: 10px;
    background-color: white;
@@ -257,11 +257,11 @@ $screen-xxl-min: 1600px;
    }
 }
 
-.scpy-widget {
+.easy-widget {
    margin-top: 10px;
    margin-bottom: 10px;
 
-   .scpy-widget__id {
+   .easy-widget__id {
       margin-top: 10px;
    }
 }

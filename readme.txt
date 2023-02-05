@@ -1,4 +1,4 @@
-=== Simple Copyright ===
+=== Easy Copyright ===
 Contributors: rdndev
 Tags: copyright, shortcode
 Requires at least: 5.9
@@ -12,9 +12,9 @@ WordPress plugin that allows you to add copyrights to the site using shortcodes
 
 == Description ==
 
-WordPress simple copyright plugin is used to add copyright to your site using shortcode via admin-panel.
+WordPress 'Easy Copyright' plugin is used to add copyright to your site using shortcode via admin-panel.
 
-You can add, edit, delete copyrights in `Simple Copyright` wordpress submenu.
+You can add, edit, delete copyrights in `Easy Copyright` wordpress submenu.
 
 In order to add copyright you need to press `Add New Copyright` button in the specified menu and fill required fields.
 
@@ -39,15 +39,15 @@ You can use shortcode in wordpress editors or in php code.
 
 **In WordPress Editors**: 
 ```
-[simple-copyright id='COPYRIGHT_ID_HERE']
+[easy-copyright id='COPYRIGHT_ID_HERE']
 ```
 **In PHP Code**: 
 ```php 
-do_shortcode( '[simple-copyright id='COPYRIGHT_ID_HERE']' );
+do_shortcode( '[easy-copyright id='COPYRIGHT_ID_HERE']' );
 ```
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.0 =   
 
 * First public plugin version
