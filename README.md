@@ -16,6 +16,7 @@ When you add plugin, you can see two tabs.
 * Item Order
 
 **Information Tab** — Information about copyright (Copyright Name, Start Year, etc.)
+
 **Item Order** — Copyright component display order (E.g. \[copyright_name\] \[start_year\] — \[end_year\] ... )
 
 _Note_: You can add additional text in item order tab.
