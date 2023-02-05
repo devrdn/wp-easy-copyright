@@ -10,7 +10,7 @@ In order to add copyright you need to press `Add New Copyright` button in the sp
 
 ## Tabs
 
-When you add plugin, you can see two tabs.
+When you add copyright, you can see two tabs.
 
 * Information
 * Item Order
