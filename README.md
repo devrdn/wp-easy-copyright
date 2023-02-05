@@ -6,7 +6,7 @@ WordPress simple copyright plugin is used to add copyright to your site using sh
 
 You can add, edit, delete copyrights in `Simple Copyright` wordpress submenu.
 
-In order to add copyright you need to press `Add New Copyright` button in the specified menu and fill all fields.
+In order to add copyright you need to press `Add New Copyright` button in the specified menu and fill required fields.
 
 ## Tabs
 
