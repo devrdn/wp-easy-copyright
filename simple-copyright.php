@@ -2,9 +2,9 @@
 
 /**
  * Plugin Name: Simple Copyright
- * Description: A plugin to manage copyright information for MSU.
- * Version: 0.0.1
- * Author: Nikken Plugins
+ * Description: A plugin to manage copyright information
+ * Version: 1.0.0
+ * Author: rdndev
  * License: GPLv2 or later
  * 
  * 
@@ -22,11 +22,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * 
- * Copyright 2022 Nikken Plugins, Inc.
+ * Copyright 2022 rdndev.
  * 
  * 
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
- * Copyright: Nikken Plugins
+ * Copyright: rdndev
  * Text Domain: simple-copy
  * Domain Path: /lang
  */

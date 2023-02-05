@@ -12,7 +12,7 @@ if ( !class_exists( SimpleCopyright_Widget::class ) ) :
 /**
  * Class for SimpleCopyright Widget
  * 
- * @since   0.0.1
+ * @since   1.0.0
  */
 class SimpleCopyright_Widget extends WP_Widget {
 
@@ -20,7 +20,7 @@ class SimpleCopyright_Widget extends WP_Widget {
     * Widget constuctor
     * Creating new widget (calls parent constructor)
     *
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public function __construct() {
       $widget_options = array(
@@ -38,7 +38,7 @@ class SimpleCopyright_Widget extends WP_Widget {
    /**
     * Creating widget front-end
     *
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public function widget($args, $instance) {
       echo $args['before_widget'];
@@ -53,7 +53,7 @@ class SimpleCopyright_Widget extends WP_Widget {
    /**
     * Creating back-end widget form
     *
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public function form($instance) {
       $id = isset( $instance['id'] ) ? $instance['id'] : '';
@@ -69,7 +69,7 @@ class SimpleCopyright_Widget extends WP_Widget {
     * Updating Widget
     * Replacing old instance with new instance
     * 
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public function update($new_instance, $old_instance) {
       $instance = $old_instance;

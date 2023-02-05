@@ -13,7 +13,7 @@ if ( ! class_exists( SimpleCopyright_Shortcode::class ) ) :
  * 
  * This class is used to define shortcodes for the plugin.
  * 
- * @since 0.0.1
+ * @since 1.0.0
  */
 class SimpleCopyright_Shortcode
 {
@@ -21,7 +21,7 @@ class SimpleCopyright_Shortcode
    /**
     * Init hooks and filters
     *
-    * @since 0.0.1
+    * @since 1.0.0
     */
    public function __construct() {
       add_action( 'init', [ __CLASS__, 'copyright_register_shortcode' ] );
@@ -32,7 +32,7 @@ class SimpleCopyright_Shortcode
    /**
     * Register Copyright shortcode
     *
-    * @since 0.0.1
+    * @since 1.0.0
     */
    public static function copyright_register_shortcode() {
       add_shortcode( 'simple-copyright', [ __CLASS__, 'copyright_shortcode' ] );
@@ -43,7 +43,7 @@ class SimpleCopyright_Shortcode
     *
     * @param   array  $raw_atts  shortcode attributes
     * @return  string $html      html code of copyright
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public static function copyright_shortcode($raw_atts = array())
    {
@@ -76,7 +76,7 @@ class SimpleCopyright_Shortcode
     *
     * @param   array  $data      copyright data
     * @return  string $html      html code of copyright
-    * @since   0.0.1
+    * @since   1.0.0
     */
    public static function copyright_render_shortcode( $data = array() ) { 
 
@@ -127,7 +127,7 @@ class SimpleCopyright_Shortcode
     * Shows the Shortcode to user,
     * when post is published
     *
-    * @since 0.0.1
+    * @since 1.0.0
     */
    public static function copyright_show_shortcode( $post ) {
       if ( $post->post_type === SimpleCopyright::$post_type ) {
