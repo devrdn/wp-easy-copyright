@@ -160,7 +160,7 @@ class EasyCopyright_CustomPost
          'has_archive'         => false,
          'labels'              => $labels,
          'supports'            => [ 'title' ],
-         'menu_icon'           => 'dashicons-admin-site',
+         'menu_icon'           => 'dashicons-admin-site'
       );
 
       register_post_type( EasyCopyright::$post_type , $args );

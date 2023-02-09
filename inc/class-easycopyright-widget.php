@@ -25,12 +25,12 @@ class EasyCopyright_Widget extends WP_Widget {
    public function __construct() {
       $widget_options = array(
          'classname'    => 'easy_widget',
-         'description'  => __( 'Shows Your Own Copyright', 'easy-copy' ),
+         'description'  => __( 'Shows Your Own Copyright', 'easy-copy' )
       );
       parent::__construct( 
          'easycopyright_widget', 
          __( 'EasyCopyright Widget' , 'easy-copy' ), 
-         $widget_options,
+         $widget_options
       );
    }
 
