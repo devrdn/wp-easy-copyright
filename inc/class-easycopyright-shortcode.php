@@ -134,8 +134,8 @@ class EasyCopyright_Shortcode
          if ( 'publish' === $post->post_status ) {
       ?>
          <div class='easy-shortcode'>
-            <input readonly onclick="this.select();" value="[easy-copyright id='<?echo $post->ID; ?>']">   
-            <input class="easy-shortcode__showblock" readonly onclick="this.select();" value="do_shortcode( '[easy-copyright id='<?echo $post->ID; ?>']' );">   
+            <input readonly onclick="this.select();" value="[easy-copyright id='<?echo esc_attr( $post->ID ); ?>']">   
+            <input class="easy-shortcode__showblock" readonly onclick="this.select();" value="do_shortcode( '[easy-copyright id='<?echo esc_attr( $post->ID ); ?>']' );">   
          </div>
       <?php
          }

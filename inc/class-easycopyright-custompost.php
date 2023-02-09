@@ -118,11 +118,11 @@ class EasyCopyright_CustomPost
             'default'   => '[symbol] [start_year] [end_year] [copyright_name]. [extra_text].',
             'class'     => 'easy__item_order',
             'info'      => [
-               'copyright_name'  => 'Name of the enterprise / company, etc',
-               'start_year'      => 'Copyright Start Year',
-               'end_year'        => 'Copyright End Year',
-               'symbol'          => 'Copyright Symbol',
-               'extra_text'      => 'Copyright extra text'
+               'copyright_name'  =>  __( 'Name of the enterprise / company, etc', 'easy-copy'),
+               'start_year'      =>  __( 'Copyright Start Year', 'easy-copy'),
+               'end_year'        =>  __( 'Copyright End Year', 'easy-copy'),
+               'symbol'          =>  __( 'Copyright Symbol', 'easy-copy'),
+               'extra_text'      =>  __( 'Copyright extra text', 'easy-copy')
             ]
          ]
       ];
@@ -193,7 +193,7 @@ class EasyCopyright_CustomPost
          
          case 'shortcode':
             if ( 'publish' == $post->post_status ) {
-               echo '<code>[easy-copyright id="'.$post_id.'"]</code>';
+               echo '<code>[easy-copyright id="'. esc_attr( $post_id ).'"]</code>';
             } else {
                _e( 'Save copyright in order to see shortcode', 'easy-copy' );
             }
@@ -270,18 +270,18 @@ class EasyCopyright_CustomPost
                   ?> 
                   <div class="easy-metabox-field">
                      <div class="easy-metabox-field__label">
-                        <label for='<?php echo $field_name; ?>'><?php _e($field_data['label'], 'easy-copy'); ?></label>
+                        <label for='<?php echo esc_attr( $field_name ); ?>'><?php echo esc_attr( $field_data['label'] ); ?></label>
                      </div>
                      <div class="easy-metabox-field__options">
                         <div class="easy-metabox-field__input">
-                              <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                                 name='<?php echo $field_name; ?>' value='<?php echo $easy_info[ $field_name ]?>'
-                                 maxlength='<?php echo $field_data['maxlength']; ?>'
+                              <input type='<?php echo  esc_attr( $field_data['type'] ); ?>' id='<?php echo esc_attr( $field_name ); ?>' 
+                                 name='<?php echo esc_attr( $field_name ); ?>' value='<?php echo esc_attr ($easy_info[ $field_name ] )?>'
+                                 maxlength='<?php echo esc_attr( $field_data['maxlength'] ); ?>'
                               />
-                           <span>Default: <code><?php _e($field_data['default'], 'easy-copy'); ?></code></span>
+                           <span>Default: <code><?php echo esc_attr( $field_data['default'] ); ?></code></span>
                         </div>
                         <div class="easy-metabox-field__desc">
-                           <span> * <?php _e($field_data['desc'], 'easy-copy'); ?></span>
+                           <span> * <?php echo esc_attr( $field_data['label'] ); ?></span>
                         </div>
                      </div>
                   </div>
@@ -295,27 +295,27 @@ class EasyCopyright_CustomPost
                   <div class="easy-metabox-field">
                      <div class="easy-metabox-field__info">
                         <div class="easy-metabox-field__label">
-                           <label for='<?php echo $field_name; ?>'><h3><?php _e($field_data['label'], 'easy-copy'); ?></h3></label>
+                           <label for='<?php echo esc_attr( $field_name ); ?>'><h3><?php echo esc_attr( $field_data['label'] ); ?></h3></label>
                         </div>
                         <div class="easy-metabox-field__info">
                            <?php foreach( $field_data['info'] as $info_name => $info_desc ): ?>
                               <div class="easy-item">
-                                 <span class="easy-item__name"><code>[<?php _e($info_name, 'easy-copy'); ?>]</code>&nbsp;-&nbsp;<?php _e($info_desc, 'easy-copy'); ?></span>
+                                 <span class="easy-item__name"><code>[<?php echo esc_attr( $info_name ); ?>]</code>&nbsp;-&nbsp;<?php echo esc_attr( $info_desc ); ?></span>
                               </div>
                            <?php endforeach; ?>
                         </div>
                      </div>
                      <div class="easy-metabox-field__options">
                         <div class="easy-metabox-field__input">
-                              <input type='<?php echo $field_data['type']; ?>' id='<?php echo $field_name; ?>' 
-                                 name='<?php echo $field_name; ?>' 
-                                 maxlength='<?php echo $field_data['maxlength']; ?>'
-                                 value='<?php echo $easy_info[ $field_name ] ?>'
+                              <input type='<?php echo esc_attr( $field_data['type'] ); ?>' id='<?php echo esc_attr( $field_name ); ?>' 
+                                 name='<?php echo esc_attr( $field_name ); ?>' 
+                                 maxlength='<?php echo esc_attr( $field_data['maxlength'] ); ?>'
+                                 value='<?php echo esc_attr( $easy_info[ $field_name ] )?>'
                               />
-                           <span>Default: <code><?php _e($field_data['default'], 'easy-copy'); ?></code></span>
+                           <span>Default: <code><?php echo esc_attr( $field_data['default'] ); ?></code></span>
                         </div>
                         <div class="easy-metabox-field__desc">
-                           <span> * <?php _e($field_data['desc'], 'easy-copy'); ?></span>
+                           <span> * <?php echo esc_attr( $field_data['desc'] ); ?></span>
                         </div>
                      </div>
                   </div>
@@ -379,8 +379,6 @@ class EasyCopyright_CustomPost
          return $post_id;
       }
 
-
-
       // save metabox data
       $fields = self::copyright_get_fields_data();
       $fields_order = self::copyright_get_field_order_info();
@@ -403,7 +401,6 @@ class EasyCopyright_CustomPost
          }
       }
 
-
       // save extra fields (order)
       if( empty( $_POST[ $fields_order_name ]  ) ) {
          delete_post_meta( $post_id, $fields_order_name );
@@ -411,7 +408,7 @@ class EasyCopyright_CustomPost
 
       // save fields order
       if( strlen( $_POST[ $fields_order_name ] ) < $fields_order['maxlength'] ) {
-         update_post_meta( $post_id, $fields_order_name, $_POST[ $fields_order_name ] );
+         update_post_meta( $post_id, $fields_order_name, sanitize_text_field( $_POST[ $fields_order_name ] ) );
       } else {
          delete_post_meta( $post_id, $fields_order_name ); 
       }

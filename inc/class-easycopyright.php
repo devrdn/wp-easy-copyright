@@ -12,12 +12,12 @@ if ( ! class_exists( EasyCopyright::class ) ) :
 
 /**
  * The core plugin class.
-   * 
-   * This is used to define internationalization, admin-specific hooks, and
-   * public-facing site hooks.
-   * 
-   * @since 1.0.0
-   */
+ * 
+ * This is used to define internationalization, admin-specific hooks, and
+ * public-facing site hooks.
+ * 
+ * @since 1.0.0
+ */
 class EasyCopyright
 {  
    /**

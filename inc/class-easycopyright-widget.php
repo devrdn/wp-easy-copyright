@@ -25,11 +25,11 @@ class EasyCopyright_Widget extends WP_Widget {
    public function __construct() {
       $widget_options = array(
          'classname'    => 'easy_widget',
-         'description'  => 'Shows Your Own Copyright',
+         'description'  => __( 'Shows Your Own Copyright', 'easy-copy' ),
       );
       parent::__construct( 
          'easycopyright_widget', 
-         esc_html__( 'EasyCopyright Widget' , 'easy-copy' ), 
+         __( 'EasyCopyright Widget' , 'easy-copy' ), 
          $widget_options,
       );
    }
@@ -45,7 +45,7 @@ class EasyCopyright_Widget extends WP_Widget {
 
       // echo copyright
       $id = $instance['id'];
-      echo do_shortcode( '[easy-copyright id="'.$id.'"]' );
+      echo do_shortcode( '[easy-copyright id="' . esc_attr( $id ). '"]' );
 
       echo $args['after_widget'];
    }
@@ -59,8 +59,8 @@ class EasyCopyright_Widget extends WP_Widget {
       $id = isset( $instance['id'] ) ? $instance['id'] : '';
       ?>
          <div class="easy-widget">
-            <label for="<?php echo $this->get_field_id('id'); ?>">Copyright ID: </label>
-            <input class="widefat easy-widget__id" type="text" name="<?php echo $this->get_field_name('id'); ?>" id="<?php echo $this->get_field_id('id'); ?>" value="<?php echo esc_attr($id); ?>" />
+            <label for="<?php echo esc_attr( $this->get_field_id('id') ); ?>">Copyright ID: </label>
+            <input class="widefat easy-widget__id" type="text" name="<?php echo esc_attr( $this->get_field_name('id') ); ?>" id="<?php echo  esc_attr( $this->get_field_id('id') ); ?>" value="<?php echo esc_attr( $id ); ?>" />
          </div>
       <?php
    }

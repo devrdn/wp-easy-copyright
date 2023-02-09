@@ -2,7 +2,7 @@
 Contributors: rdndev
 Tags: copyright, shortcode
 Requires at least: 5.9
-Tested up to: 5.9
+Tested up to: 6.0
 Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
