@@ -43,7 +43,7 @@ You can use shortcode in wordpress editors or in php code.
 ```
 **In PHP Code**: 
 ```php 
-do_shortcode( '[easy-copyright id='COPYRIGHT_ID_HERE']' );
+do_shortcode( "[easy-copyright id='COPYRIGHT_ID_HERE']" );
 ```
 
 == Changelog ==

@@ -130,12 +130,13 @@ class EasyCopyright_Shortcode
     * @since 1.0.0
     */
    public static function copyright_show_shortcode( $post ) {
+      $php_shortcode_preview = "do_shortcode( '[easy-copyright id=\"" . $post->ID . "\"]' )";
       if ( $post->post_type === EasyCopyright::$post_type ) {
          if ( 'publish' === $post->post_status ) {
       ?>
          <div class='easy-shortcode'>
             <input readonly onclick="this.select();" value="[easy-copyright id='<?echo esc_attr( $post->ID ); ?>']">   
-            <input class="easy-shortcode__showblock" readonly onclick="this.select();" value="do_shortcode( '[easy-copyright id='<?echo esc_attr( $post->ID ); ?>']' );">   
+            <input class="easy-shortcode__showblock" readonly onclick="this.select();" value="<?php echo esc_attr( $php_shortcode_preview ) ?>">   
          </div>
       <?php
          }
