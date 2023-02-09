@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: EasyCopyright\n"
-"POT-Creation-Date: 2023-02-05 21:09+0200\n"
+"POT-Creation-Date: 2023-02-09 18:37+0200\n"
 "PO-Revision-Date: 2023-02-05 21:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,7 @@ msgid "Copyright Name"
 msgstr ""
 
 #: inc/class-easycopyright-custompost.php:73
+#: inc/class-easycopyright-custompost.php:121
 msgid "Name of the enterprise / company, etc"
 msgstr ""
 
@@ -35,6 +36,7 @@ msgid "Start Year"
 msgstr ""
 
 #: inc/class-easycopyright-custompost.php:81
+#: inc/class-easycopyright-custompost.php:122
 msgid "Copyright Start Year"
 msgstr ""
 
@@ -43,6 +45,7 @@ msgid "End Year"
 msgstr ""
 
 #: inc/class-easycopyright-custompost.php:89
+#: inc/class-easycopyright-custompost.php:123
 msgid "Copyright End Year"
 msgstr ""
 
@@ -51,6 +54,7 @@ msgid "Symbol"
 msgstr ""
 
 #: inc/class-easycopyright-custompost.php:97
+#: inc/class-easycopyright-custompost.php:124
 msgid "Copyright Symbol"
 msgstr ""
 
@@ -68,6 +72,10 @@ msgstr ""
 
 #: inc/class-easycopyright-custompost.php:116
 msgid "Copyright information order"
+msgstr ""
+
+#: inc/class-easycopyright-custompost.php:125
+msgid "Copyright extra text"
 msgstr ""
 
 #: inc/class-easycopyright-custompost.php:140
@@ -131,6 +139,10 @@ msgstr ""
 
 #: inc/class-easycopyright-shortcode.php:64
 msgid "No such copright ID found"
+msgstr ""
+
+#: inc/class-easycopyright-widget.php:28
+msgid "Shows Your Own Copyright"
 msgstr ""
 
 #: inc/class-easycopyright-widget.php:32
