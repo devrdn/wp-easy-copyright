@@ -32,6 +32,6 @@ You can use shortcode in wordpress editors or in php code.
 [easy-copyright id='COPYRIGHT_ID_HERE']
 ```
 **In PHP Code**: 
-```php 
+```php
 do_shortcode( '[easy-copyright id='COPYRIGHT_ID_HERE']' );
 ```

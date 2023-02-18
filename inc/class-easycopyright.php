@@ -118,8 +118,8 @@ class EasyCopyright
     */
    public static function ec_enqueue_front()
    {
-      wp_enqueue_style( 'ec-front-style',  EASYCOPYRIGHT__ASSETS_DIR.'assets/css/front/style.css' );
-      wp_enqueue_script( 'ec-front-script', EASYCOPYRIGHT__ASSETS_DIR.'assets/js/front/script.js', array( 'jquery' ), 1.0, true);
+      wp_enqueue_style( 'ec-front-style',  EASYCOPYRIGHT__ASSETS_DIR.'/css/front/style.css' );
+      wp_enqueue_script( 'ec-front-script', EASYCOPYRIGHT__ASSETS_DIR.'/js/front/script.js', array( 'jquery' ), 1.0, true);
    }
 
 }
