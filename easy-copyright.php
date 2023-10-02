@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Easy Copyright
  * Description: A plugin to manage copyright information
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: rdndev
  * License: GPLv2 or later
  * 

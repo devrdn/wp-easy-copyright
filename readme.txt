@@ -2,8 +2,8 @@
 Contributors: rdndev
 Tags: copyright, shortcode
 Requires at least: 5.9
-Tested up to: 6.2
-Stable tag: 1.0.3
+Tested up to: 6.3.1
+Stable tag: 1.0.4
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -64,3 +64,7 @@ do_shortcode( "[easy-copyright id='COPYRIGHT_ID_HERE']" );
 = 1.0.3 =
 
 * Test - Plugin tested up on WP version 6.2
+
+= 1.0.4 =
+
+* Test - Plugin tested up on WP version 6.3.1
